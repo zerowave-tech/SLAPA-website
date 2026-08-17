@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0A0A0A; color: #F2EFEA; font-family: Onest, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #E9804A; }
+  ::selection { background: #E9804A; color: #0A0A0A; }
+  input, textarea, button { font-family: inherit; }
+  @keyframes slapa-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="max-width: 100%; overflow-x: hidden; padding: 0 20px 20px">
+
+<header style="position: sticky; top: 16px; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: clamp(10px, 1.4vw, 20px); margin: 16px auto 0; max-width: 1360px; padding: 12px 14px 12px 20px; background: #E9804A; border: 1px solid rgba(10,10,10,0.12); border-radius: 999px; color: #0A0A0A">
+  <a href="#top" style="display: flex; align-items: center; gap: 11px; flex: 0 0 auto; color: #0A0A0A" style-hover="opacity: 0.75; color: #0A0A0A">
+    <img src="assets/slapa-mark-black.png" alt="SLAPA" style="display: block; height: 26px; width: auto" />
+    <span style="font-size: 18px; font-weight: 800; letter-spacing: 0.16em">SLAPA</span>
+  </a>
+  <nav style="display: flex; align-items: center; flex: 1 1 auto; min-width: 0; justify-content: center; flex-wrap: wrap; gap: 6px clamp(12px, 1.6vw, 26px); font-size: 14px; font-weight: 600">
+    <a href="#services" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navServices }}</a>
+    <a href="#cases" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navCases }}</a>
+    <a href="#faq" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navFaq }}</a>
+    <a href="#contact" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navContact }}</a>
+    <a href="#legal" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.legalTitle }}</a>
+  </nav>
+  <div style="display: flex; align-items: center; flex: 0 0 auto; gap: 10px">
+    <div style="display: flex; gap: 2px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px">
+      <sc-for list="{{ langs }}" as="l" hint-placeholder-count="4">
+        <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}">{{ l.code }}</button>
+      </sc-for>
+    </div>
+    <a href="#contact" style="padding: 12px 22px; background: #0A0A0A; color: #F2EFEA; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA; color: #0A0A0A">{{ t.callCta }}</a>
+  </div>
+</header>
+
+<section id="top" style="position: relative; max-width: 1360px; margin: 0 auto; padding: 108px 0 0; overflow: hidden">
+  <div style="position: absolute; top: -220px; left: 50%; transform: translateX(-50%); width: 900px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.34), rgba(232,129,75,0)); pointer-events: none"></div>
+  <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px">
+    <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border: 1px solid rgba(242,239,234,0.14); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.72); white-space: nowrap">
+      <span style="width: 6px; height: 6px; border-radius: 999px; background: #E9804A"></span>{{ t.eyebrow }}
+    </span>
+    <h1 style="margin: 0; max-width: 16ch; font-size: clamp(46px, 7.4vw, 116px); line-height: 1; font-weight: 900; letter-spacing: -0.04em; text-wrap: balance">{{ t.h1 }}</h1>
+    <p style="margin: 0; max-width: 58ch; font-size: 19px; line-height: 1.5; color: rgba(242,239,234,0.66); text-wrap: pretty">{{ t.heroSub }}</p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px">
+      <a href="#contact" style="padding: 17px 30px; background: #E9804A; color: #0A0A0A; border-radius: 999px; font-size: 15px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA">{{ t.callCta }}</a>
+      <a href="#cases" style="padding: 17px 30px; border: 1px solid rgba(242,239,234,0.18); border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap" style-hover="background: rgba(242,239,234,0.08); color: #F2EFEA">{{ t.navCases }} →</a>
+    </div>
+  </div>
+  <sc-if value="{{ showMockup }}" hint-placeholder-val="{{ true }}">
+    <div style="position: relative; margin-top: 64px; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px; background: #121212; padding: 12px">
+      <div style="position: relative; aspect-ratio: 16 / 8; border-radius: 20px; overflow: hidden">
+        <image-slot id="slapa-hero" shape="rect" placeholder="{{ t.heroSlot }}"></image-slot>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top: 30px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)">
+      <div style="display: flex; width: max-content; animation: slapa-marquee 34s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.4)">
+        <span style="padding-right: 28px">{{ t.marquee }}</span>
+        <span style="padding-right: 28px">{{ t.marquee }}</span>
+      </div>
+    </div>
+  </sc-if>
+</section>
+
+<section id="services" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">01 — {{ t.navServices }}</span>
+    <h2 style="margin: 0; max-width: 22ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.servicesTitle }}</h2>
+    <p style="margin: 0; max-width: 52ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.servicesSub }}</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px">
+    <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+      <div style="{{ s.cardStyle }}" style-hover="border-color: rgba(232,129,75,0.55)">
+        <sc-if value="{{ s.hasImage }}" hint-placeholder-val="{{ true }}">
+        <div style="position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden">
+          <image-slot id="{{ s.slotId }}" shape="rect" placeholder="{{ s.slot }}"></image-slot>
+        </div>
+        </sc-if>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 0 14px">
+          <div style="display: flex; align-items: baseline; gap: 12px">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #E9804A">{{ s.num }}</span>
+            <h3 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1">{{ s.title }}</h3>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgba(242,239,234,0.62); text-wrap: pretty">{{ s.text }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">02 — {{ t.baTitle }}</span>
+    <h2 style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.baHeading }}</h2>
+    <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.5); white-space: nowrap">{{ t.baHint }}</p>
+  </div>
+  <div style="padding: 12px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px">
+    <div data-ba-frame="1" style="position: relative; aspect-ratio: 16 / 8.5; border-radius: 20px; overflow: hidden; user-select: none">
+      <div style="position: absolute; inset: 0; background: #161616">
+        <image-slot id="slapa-after" shape="rect" src="assets/ba-after.png" placeholder="{{ t.afterSlot }}"></image-slot>
+      </div>
+      <div data-ba-clip="1" style="position: absolute; inset: 0; clip-path: inset(0 55% 0 0); background: #1F1B18; will-change: clip-path">
+        <image-slot id="slapa-before" shape="rect" src="assets/ba-before.png" placeholder="{{ t.beforeSlot }}"></image-slot>
+      </div>
+      <div data-ba-line="1" style="position: absolute; top: 0; bottom: 0; left: 45%; width: 2px; background: #F2EFEA; pointer-events: none; will-change: left">
+        <div role="slider" onPointerDown="{{ dragStart }}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54px; height: 54px; border-radius: 999px; background: #F2EFEA; color: #0A0A0A; display: grid; place-items: center; font-size: 15px; font-weight: 700; cursor: col-resize; pointer-events: auto; touch-action: none">↔</div>
+      </div>
+      <div style="position: absolute; top: 18px; left: 18px; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #0A0A0A; background: #F2EFEA; padding: 5px 11px; border-radius: 999px">{{ t.beforeTag }}</div>
+      <div style="position: absolute; top: 18px; right: 18px; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #0A0A0A; background: #F2EFEA; padding: 5px 11px; border-radius: 999px">{{ t.afterTag }}</div>
+    </div>
+  </div>
+</section>
+
+<section id="cases" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">03 — {{ t.navCases }}</span>
+    <h2 style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.casesTitle }}</h2>
+    <p style="margin: 0; max-width: 50ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.casesSub }}</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px" data-note="case-grid">
+    <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
+      <article style="display: flex; flex-direction: column; gap: 20px; padding: 14px 14px 26px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px; color: inherit" style-hover="border-color: rgba(233,128,74,0.55)">
+        <div style="position: relative; aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden">
+          <image-slot id="{{ c.slotId }}" shape="rect" placeholder="{{ c.slot }}"></image-slot>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 0 14px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+            <h3 style="margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.03em">{{ c.name }}</h3>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #E9804A">{{ c.tag }}</span>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgba(242,239,234,0.62); text-wrap: pretty">{{ c.text }}</p>
+          <a href="{{ c.href }}" target="_blank" rel="noopener" style="margin-top: 4px; align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(242,239,234,0.5)" style-hover="color: #E9804A">{{ c.url }} ↗</a>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<section id="faq" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+  <div style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 60px; align-items: start">
+    <div style="display: flex; flex-direction: column; gap: 18px; position: sticky; top: 110px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">04 — FAQ</span>
+      <h2 style="margin: 0; font-size: clamp(32px, 4.2vw, 58px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.faqTitle }}</h2>
+      <p style="margin: 0; max-width: 34ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.faqSub }}</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+        <div style="background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 22px; overflow: hidden">
+          <button type="button" onClick="{{ f.toggle }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 24px 26px; background: none; border: 0; cursor: pointer; text-align: left; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; color: inherit" style-hover="color: #E9804A">
+            <span>{{ f.q }}</span>
+            <span style="flex-shrink: 0; width: 30px; height: 30px; border-radius: 999px; background: rgba(242,239,234,0.08); display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 16px">{{ f.sign }}</span>
+          </button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 0 26px 26px; font-size: 16px; line-height: 1.6; color: rgba(242,239,234,0.62); max-width: 62ch; text-wrap: pretty">{{ f.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="position: relative; max-width: 1360px; margin: 130px auto 0; padding: 64px 56px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 34px; overflow: hidden">
+  <div style="position: absolute; bottom: -260px; left: -120px; width: 700px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.3), rgba(232,129,75,0)); pointer-events: none"></div>
+  <div style="position: relative; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 32px">
+    <div style="display: flex; flex-direction: column; gap: 22px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">05 — {{ t.navContact }}</span>
+      <h2 style="margin: 0; max-width: 18ch; font-size: clamp(34px, 4.6vw, 62px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.02">{{ t.callHeading }}</h2>
+      <p style="margin: 0; max-width: 38ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.64); text-wrap: pretty">{{ t.callSub }}</p>
+    </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em">
+        <a href="mailto:hello@slapa.agency">hello@slapa.agency</a>
+        <a href="https://t.me/slapa">telegram / @slapa</a>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="padding: 10px; background: #121212; border: 1px solid rgba(242,239,234,0.12); border-radius: 26px">
+        <div id="slapa-cal" style="position: relative; min-height: 640px; border-radius: 18px; overflow: hidden; background: #0F0F0F">
+          <div data-cal-fallback="1" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 40px; text-align: center">
+            <p style="margin: 0; max-width: 34ch; font-size: 15px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.callSub }}</p>
+            <a href="{{ calLink }}" target="_blank" rel="noopener" style="padding: 15px 26px; background: #E9804A; color: #0A0A0A; border-radius: 999px; font-size: 15px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA">{{ t.callCta }} ↗</a>
+          </div>
+        </div>
+      </div>
+      <a href="{{ calLink }}" target="_blank" rel="noopener" style="align-self: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(242,239,234,0.45); text-decoration: underline; text-underline-offset: 3px" style-hover="color: #E9804A">{{ t.callFallback }} ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="legal" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">06 — {{ t.legalTitle }}</span>
+    <h2 style="margin: 0; max-width: 20ch; font-size: clamp(30px, 3.8vw, 52px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04">{{ t.legalHeading }}</h2>
+    <p style="margin: 0; max-width: 52ch; font-size: 16px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.legalSub }}</p>
+  </div>
+  <div style="display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 40px; align-items: start">
+    <div style="position: sticky; top: 110px; display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{ legalTabs }}" as="d" hint-placeholder-count="4">
+        <button type="button" onClick="{{ d.pick }}" style="{{ d.style }}">
+          <span>{{ d.title }}</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.55">{{ d.count }}</span>
+        </button>
+      </sc-for>
+      <p style="margin: 14px 4px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; letter-spacing: 0.06em; color: rgba(242,239,234,0.4)">{{ legalUpdated }}<br />{{ legalController }}</p>
+    </div>
+    <article style="padding: 42px 46px 48px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px">
+      <h3 style="margin: 0 0 14px; font-size: clamp(26px, 2.6vw, 36px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08">{{ legalDocTitle }}</h3>
+      <p style="margin: 0 0 34px; padding-bottom: 30px; border-bottom: 1px solid rgba(242,239,234,0.1); font-size: 17px; line-height: 1.55; color: rgba(242,239,234,0.66); max-width: 66ch; text-wrap: pretty">{{ legalDocLede }}</p>
+      <div style="display: flex; flex-direction: column; gap: 30px">
+        <sc-for list="{{ legalSections }}" as="s" hint-placeholder-count="6">
+          <div style="display: grid; grid-template-columns: 26px 1fr; gap: 18px; align-items: start">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding-top: 5px; color: #E9804A">{{ s.num }}</span>
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <h4 style="margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.015em">{{ s.h }}</h4>
+              <p style="margin: 0; font-size: 15.5px; line-height: 1.65; color: rgba(242,239,234,0.64); max-width: 74ch; text-wrap: pretty">{{ s.p }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer style="max-width: 1360px; margin: 0 auto; padding: 90px 0 28px">
+  <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 44px; border-bottom: 1px solid rgba(242,239,234,0.1)">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 11px">
+        <img src="assets/slapa-mark-orange.png" alt="SLAPA" style="display: block; height: 26px; width: auto" />
+        <span style="font-size: 18px; font-weight: 800; letter-spacing: 0.16em">SLAPA</span>
+      </div>
+      <p style="margin: 0; max-width: 30ch; font-size: 15px; line-height: 1.5; color: rgba(242,239,234,0.55)">{{ t.footTagline }}</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.footNav }}</span>
+      <a href="#services">{{ t.navServices }}</a>
+      <a href="#cases">{{ t.navCases }}</a>
+      <a href="#faq">{{ t.navFaq }}</a>
+      <a href="#contact">{{ t.navContact }}</a>
+      <a href="#legal">{{ t.legalTitle }}</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.footContacts }}</span>
+      <a href="mailto:hello@slapa.agency">hello@slapa.agency</a>
+      <a href="https://t.me/slapa">Telegram</a>
+      <a href="https://instagram.com">Instagram</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.legalTitle }}</span>
+      <sc-for list="{{ legalTabs }}" as="d" hint-placeholder-count="4">
+        <a href="#legal" onClick="{{ d.pick }}">{{ d.title }}</a>
+      </sc-for>
+      <button type="button" onClick="{{ cookieReset }}" style="align-self: flex-start; padding: 0; background: none; border: 0; color: #E9804A; font-size: 15px; font-weight: 500; cursor: pointer; text-align: left" style-hover="opacity: 0.7">{{ t.cookieSettings }}</button>
+    </div>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(242,239,234,0.42)">
+    <span>SLAPA © 2026</span>
+    <span>{{ t.footNote }}</span>
+  </div>
+</footer>
+
+<sc-if value="{{ showCookies }}" hint-placeholder-val="{{ false }}">
+  <div style="position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 80; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; max-width: 1360px; margin: 0 auto; padding: 20px 24px; background: rgba(18,18,18,0.94); backdrop-filter: blur(14px); border: 1px solid rgba(242,239,234,0.14); border-radius: 24px">
+    <p style="margin: 0; max-width: 62ch; font-size: 14px; line-height: 1.5; color: rgba(242,239,234,0.72)">{{ t.cookieText }} <a href="#legal" onClick="{{ openCookieDoc }}" style="text-decoration: underline; text-underline-offset: 3px">{{ t.cookieMore }}</a></p>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px">
+      <button type="button" onClick="{{ cookieEssential }}" style="padding: 12px 20px; background: transparent; color: #F2EFEA; border: 1px solid rgba(242,239,234,0.2); border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap" style-hover="background: rgba(242,239,234,0.08)">{{ t.cookieEssential }}</button>
+      <button type="button" onClick="{{ cookieAccept }}" style="padding: 12px 22px; background: #E9804A; color: #0A0A0A; border: 0; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap" style-hover="background: #F2EFEA">{{ t.cookieAccept }}</button>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ru&quot;,&quot;uk&quot;,&quot;hu&quot;,&quot;en&quot;],&quot;default&quot;:&quot;ru&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;calLink&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://cal.com/slapa.agency/20min&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showMockup&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;faqStartOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+const DICT = {
+  ru: {
+    navServices: "Услуги", navCases: "Кейсы", navFaq: "FAQ", navContact: "Контакты",
+    cta: "Оставить заявку",
+    eyebrow: "Переделка старых сайтов",
+    h1: "Редизайн сайтов",
+    heroSub: "Берём ваш старый сайт и переделываем под новый лад: свежее оформление, мобильная версия, при необходимости — перенос и смена домена.",
+    heroSlot: "главный экран нового сайта",
+    marquee: "редизайн — мобильная версия — смена домена — скорость — редизайн — мобильная версия — смена домена — скорость —",
+    servicesTitle: "Что делаем",
+    servicesSub: "Работаем с тем, что у вас уже есть, и доводим до состояния, за которое не стыдно.",
+    services: [
+      ["Редизайн", "Полностью новое оформление на основе того, что у вас уже есть. Структура, типографика, сетка, состояния.", "экраны до и после"],
+      ["Мобильная версия", "Отдельно продуманные мобильные экраны, а не сжатая версия десктопа.", "мобильные экраны"],
+      ["Перенос и домен", "Переносим содержимое на новую площадку, при необходимости меняем домен и настраиваем редиректы.", "схема переноса"],
+      ["Скорость и правки", "Убираем лишний вес, чиним вёрстку и остаёмся рядом на время правок после запуска.", "отчёт по скорости"]
+    ],
+    baTitle: "До и после",
+    baHeading: "Один и тот же сайт, до и после",
+    baHint: "Потяните ползунок",
+    beforeTag: "До", afterTag: "После",
+    beforeSlot: "скриншот старого сайта", afterSlot: "скриншот нового сайта",
+    casesTitle: "Кейсы",
+    casesSub: "Проекты, на которых видно разницу между «работает» и «выглядит».",
+    cases: [
+      ["Sikra", "Веб и мобильная версия сайта студии Sikra: плотная сетка, крупная типографика, спокойный ритм.", "web + mobile", "https://sikra.agency/"],
+      ["Perfect Smile", "Сайт стоматологии: чистая структура, акцент на услугах и записи на приём.", "web", "https://perfect-smile-website-silk.vercel.app/"],
+      ["Épitő-szerelő Kft.", "Сайт строительно-монтажной компании в Венгрии: услуги, портфолио, контакты.", "web", "https://ekft.vercel.app/"],
+      ["Férfikéz Egy Óra", "Сайт мастерской по ремонту часов: витрина услуг и запись.", "web", "https://ferfikez.vercel.app/"]
+    ],
+    caseSlot: "скриншот проекта",
+    faqTitle: "Что обычно спрашивают",
+    faqSub: "Если вашего вопроса здесь нет — напишите, ответим в тот же день.",
+    faqs: [
+      ["Сколько занимает редизайн?", "Небольшой сайт на несколько страниц — 2–3 недели. Крупные проекты разбиваем на этапы и согласовываем сроки заранее."],
+      ["Нужно ли переписывать тексты?", "Не обязательно. Мы работаем с вашими текстами, а если нужно — предложим правки структуры и заголовков."],
+      ["Что если сайт сделан на старой платформе?", "Смотрим, что есть, и предлагаем варианты: остаться на той же платформе или перенести содержимое на новую."],
+      ["Можно ли сменить домен?", "Да. Настраиваем новый домен и редиректы со старых адресов, чтобы не потерять переходы."],
+      ["Как считается стоимость?", "По объёму: количество страниц, сложность оформления, мобильная версия, перенос. Оценку присылаем после короткого разговора."]
+    ],
+    footTagline: "Агентство редизайна. Берём старые сайты и приводим их в порядок.",
+    footNav: "Разделы", footContacts: "Связь",
+    legalTitle: "Документы",
+    callTitle: "Звонок", callHeading: "Выберите время для разговора", callSub: "20 минут: смотрим ваш сайт, обсуждаем задачу и сроки.", callCta: "Выбрать время", callFallback: "Открыть календарь в новой вкладке",
+    cookieSettings: "Настройки cookie",
+    legalHeading: "Документы и данные", legalSub: "Полные тексты. Договор и счёт присылаем отдельно перед началом работы.",
+    cookieText: "Мы используем cookie, чтобы сайт работал корректно и мы видели статистику посещений.", cookieAccept: "Принять", cookieEssential: "Только необходимые", cookieMore: "Подробнее",
+    footNote: "Редизайн сайтов"
+  },
+  uk: {
+    navServices: "Послуги", navCases: "Кейси", navFaq: "FAQ", navContact: "Контакти",
+    cta: "Залишити заявку",
+    eyebrow: "Переробка старих сайтів",
+    h1: "Редизайн сайтів",
+    heroSub: "Беремо ваш старий сайт і переробляємо на новий лад: свіже оформлення, мобільна версія, за потреби — перенесення і зміна домену.",
+    heroSlot: "головний екран нового сайту",
+    marquee: "редизайн — мобільна версія — зміна домену — швидкість — редизайн — мобільна версія — зміна домену — швидкість —",
+    servicesTitle: "Що робимо",
+    servicesSub: "Працюємо з тим, що у вас уже є, і доводимо до стану, за який не соромно.",
+    services: [
+      ["Редизайн", "Повністю нове оформлення на основі того, що у вас уже є. Структура, типографіка, сітка, стани.", "екрани до і після"],
+      ["Мобільна версія", "Окремо продумані мобільні екрани, а не стиснута версія десктопу.", "мобільні екрани"],
+      ["Перенесення і домен", "Переносимо вміст на новий майданчик, за потреби змінюємо домен і налаштовуємо редіректи.", "схема перенесення"],
+      ["Швидкість і правки", "Прибираємо зайву вагу, лагодимо верстку і залишаємось поруч під час правок після запуску.", "звіт про швидкість"]
+    ],
+    baTitle: "До і після",
+    baHeading: "Той самий сайт, до і після",
+    baHint: "Потягніть повзунок",
+    beforeTag: "До", afterTag: "Після",
+    beforeSlot: "скриншот старого сайту", afterSlot: "скриншот нового сайту",
+    casesTitle: "Кейси",
+    casesSub: "Проєкти, на яких видно різницю між «працює» і «виглядає».",
+    cases: [
+      ["Sikra", "Веб і мобільна версія сайту студії Sikra: щільна сітка, велика типографіка, спокійний ритм.", "web + mobile", "https://sikra.agency/"],
+      ["Perfect Smile", "Сайт стоматології: чиста структура, акцент на послугах і записі на прийом.", "web", "https://perfect-smile-website-silk.vercel.app/"],
+      ["Épitő-szerelő Kft.", "Сайт будівельно-монтажної компанії в Угорщині: послуги, портфоліо, контакти.", "web", "https://ekft.vercel.app/"],
+      ["Férfikéz Egy Óra", "Сайт майстерні з ремонту годинників: вітрина послуг і запис.", "web", "https://ferfikez.vercel.app/"]
+    ],
+    caseSlot: "скриншот проєкту",
+    faqTitle: "Що зазвичай питають",
+    faqSub: "Якщо вашого питання тут немає — напишіть, відповімо того ж дня.",
+    faqs: [
+      ["Скільки триває редизайн?", "Невеликий сайт на кілька сторінок — 2–3 тижні. Великі проєкти розбиваємо на етапи і узгоджуємо терміни заздалегідь."],
+      ["Чи потрібно переписувати тексти?", "Не обов'язково. Ми працюємо з вашими текстами, а якщо потрібно — запропонуємо правки структури і заголовків."],
+      ["Що якщо сайт зроблений на старій платформі?", "Дивимось, що є, і пропонуємо варіанти: залишитись на тій самій платформі або перенести вміст на нову."],
+      ["Чи можна змінити домен?", "Так. Налаштовуємо новий домен і редіректи зі старих адрес, щоб не втратити переходи."],
+      ["Як вважається вартість?", "За обсягом: кількість сторінок, складність оформлення, мобільна версія, перенесення. Оцінку надсилаємо після короткої розмови."]
+    ],
+    footTagline: "Агентство редизайну. Беремо старі сайти і наводимо в них лад.",
+    footNav: "Розділи", footContacts: "Зв'язок",
+    legalTitle: "Документи",
+    callTitle: "Дзвінок", callHeading: "Виберіть час для розмови", callSub: "20 хвилин: дивимось ваш сайт, обговорюємо задачу і терміни.", callCta: "Вибрати час", callFallback: "Відкрити календар у новій вкладці",
+    cookieSettings: "Налаштування cookie",
+    legalHeading: "Документи і дані", legalSub: "Повні тексти. Договір і рахунок надсилаємо окремо перед початком роботи.",
+    cookieText: "Ми використовуємо cookie, щоб сайт працював коректно і ми бачили статистику відвідувань.", cookieAccept: "Прийняти", cookieEssential: "Лише необхідні", cookieMore: "Детальніше",
+    footNote: "Редизайн сайтів"
+  },
+  hu: {
+    navServices: "Szolgáltatások", navCases: "Munkák", navFaq: "GYIK", navContact: "Kapcsolat",
+    cta: "Ajánlatkérés",
+    eyebrow: "Régi weboldalak átépítése",
+    h1: "Weboldal redesign",
+    heroSub: "Fogjuk a régi oldalát és új formába öntjük: friss megjelenés, mobil verzió, szükség esetén átköltöztetés és domainváltás.",
+    heroSlot: "az új oldal főképernyője",
+    marquee: "redesign — mobil verzió — domainváltás — sebesség — redesign — mobil verzió — domainváltás — sebesség —",
+    servicesTitle: "Mit csinálunk",
+    servicesSub: "Azzal dolgozunk, ami már megvan, és olyan állapotba hozzuk, amit jó megmutatni.",
+    services: [
+      ["Redesign", "Teljesen új megjelenés arra épülve, ami már megvan. Szerkezet, tipográfia, rács, állapotok.", "előtte és utána képernyők"],
+      ["Mobil verzió", "Külön megtervezett mobil képernyők, nem az asztali változat összenyomva.", "mobil képernyők"],
+      ["Költözés és domain", "Áthozzuk a tartalmat az új helyre, szükség esetén domaint váltunk és átirányításokat állítunk be.", "költözés vázlata"],
+      ["Sebesség és javítások", "Leszedjük a felesleges súlyt, rendbe tesszük a kódot, és indulás után is elérhetők vagyunk.", "sebesség riport"]
+    ],
+    baTitle: "Előtte és utána",
+    baHeading: "Ugyanaz az oldal, előtte és utána",
+    baHint: "Húzza a csúszkát",
+    beforeTag: "Előtte", afterTag: "Utána",
+    beforeSlot: "a régi oldal képe", afterSlot: "az új oldal képe",
+    casesTitle: "Munkák",
+    casesSub: "Projektek, ahol látszik a különbség a „működik” és a „jól néz ki” között.",
+    cases: [
+      ["Sikra", "A Sikra stúdió weboldala és mobil verziója: sűrű rács, nagy tipográfia, nyugodt ritmus.", "web + mobile", "https://sikra.agency/"],
+      ["Perfect Smile", "Fogászati weboldal: tiszta szerkezet, a szolgáltatásokra és az időpontfoglalásra fókuszálva.", "web", "https://perfect-smile-website-silk.vercel.app/"],
+      ["Épitő-szerelő Kft.", "Építő-szerelő cég weboldala: szolgáltatások, referenciák, kapcsolat.", "web", "https://ekft.vercel.app/"],
+      ["Férfikéz Egy Óra", "Óraszerviz weboldala: szolgáltatások bemutatása és időpontfoglalás.", "web", "https://ferfikez.vercel.app/"]
+    ],
+    caseSlot: "a projekt képe",
+    faqTitle: "Amit gyakran kérdeznek",
+    faqSub: "Ha nincs itt a kérdése, írjon — aznap válaszolunk.",
+    faqs: [
+      ["Mennyi ideig tart egy redesign?", "Néhány oldalas weboldal 2–3 hét. A nagyobb projekteket szakaszokra bontjuk és a határidőket előre egyeztetjük."],
+      ["Át kell írni a szövegeket?", "Nem feltétlenül. A meglévő szövegekkel dolgozunk, és ha kell, javaslatot tesszük a szerkezetre és a címekre."],
+      ["Mi van, ha az oldal régi platformon készült?", "Megnézzük, mi van, és felvázoljuk a lehetőségeket: marad a platform, vagy átköltöztetjük a tartalmat."],
+      ["Lehet domaint váltani?", "Igen. Beállítjuk az új domaint és az átirányításokat a régi címekről, hogy ne veszítsen látogatót."],
+      ["Hogyan alakul az ár?", "A terjedelem szerint: oldalszám, a megjelenés összetettsége, mobil verzió, költözés. Egy rövid beszélgetés után küldünk becslést."]
+    ],
+    footTagline: "Redesign ügynökség. Régi oldalakat hozunk rendbe.",
+    footNav: "Menü", footContacts: "Elérhetőség",
+    legalTitle: "Dokumentumok",
+    callTitle: "Hívás", callHeading: "Válasszon időpontot a beszélgetésre", callSub: "20 perc: megnézzük az oldalát, átbeszéljük a feladatot és a határidőket.", callCta: "Időpont választása", callFallback: "Naptár megnyitása új lapon",
+    cookieSettings: "Cookie beállítások",
+    legalHeading: "Dokumentumok és adatok", legalSub: "Teljes szövegek. A szerződést és a számlát a munka előtt külön küldjük.",
+    cookieText: "Cookie-kat használunk, hogy az oldal megfelelően működjön és lássuk a látogatási statisztikát.", cookieAccept: "Elfogadom", cookieEssential: "Csak a szükségesek", cookieMore: "Részletek",
+    footNote: "Weboldal redesign"
+  },
+  en: {
+    navServices: "Services", navCases: "Work", navFaq: "FAQ", navContact: "Contact",
+    cta: "Request a quote",
+    eyebrow: "Rebuilding old websites",
+    h1: "Website redesign",
+    heroSub: "We take your old website and rebuild it in a new form: fresh design, a mobile version, and migration or a domain change when needed.",
+    heroSlot: "home screen of the new site",
+    marquee: "redesign — mobile version — domain change — speed — redesign — mobile version — domain change — speed —",
+    servicesTitle: "What we do",
+    servicesSub: "We work with what you already have and take it to a state worth showing.",
+    services: [
+      ["Redesign", "A completely new look built on what you already have. Structure, typography, grid, states.", "before and after screens"],
+      ["Mobile version", "Mobile screens designed on their own terms, not a squeezed desktop layout.", "mobile screens"],
+      ["Migration and domain", "We move the content to a new setup and, if needed, change the domain and set up redirects.", "migration diagram"],
+      ["Speed and fixes", "We cut the excess weight, fix the markup, and stay around for changes after launch.", "speed report"]
+    ],
+    baTitle: "Before and after",
+    baHeading: "The same site, before and after",
+    baHint: "Drag the handle",
+    beforeTag: "Before", afterTag: "After",
+    beforeSlot: "screenshot of the old site", afterSlot: "screenshot of the new site",
+    casesTitle: "Work",
+    casesSub: "Projects where the difference between working and looking good is visible.",
+    cases: [
+      ["Sikra", "Web and mobile version for the Sikra studio site: dense grid, large typography, calm rhythm.", "web + mobile", "https://sikra.agency/"],
+      ["Perfect Smile", "Dental clinic website: clean structure, focused on services and booking.", "web", "https://perfect-smile-website-silk.vercel.app/"],
+      ["Épitő-szerelő Kft.", "Website for a Hungarian construction and installation company: services, portfolio, contacts.", "web", "https://ekft.vercel.app/"],
+      ["Férfikéz Egy Óra", "Website for a watch repair workshop: service showcase and booking.", "web", "https://ferfikez.vercel.app/"]
+    ],
+    caseSlot: "project screenshot",
+    faqTitle: "Questions we usually get",
+    faqSub: "If yours isn't here, write to us — we answer the same day.",
+    faqs: [
+      ["How long does a redesign take?", "A small site of a few pages takes 2–3 weeks. Larger projects are split into stages with timelines agreed up front."],
+      ["Do the texts need rewriting?", "Not necessarily. We work with your copy and suggest changes to structure and headings where it helps."],
+      ["What if the site runs on an old platform?", "We look at what's there and lay out the options: stay on the same platform or move the content to a new one."],
+      ["Can we change the domain?", "Yes. We set up the new domain and redirects from the old addresses so you don't lose traffic."],
+      ["How is the price calculated?", "By scope: number of pages, complexity of the design, mobile version, migration. We send an estimate after a short call."]
+    ],
+    footTagline: "A redesign agency. We take old websites and put them in order.",
+    footNav: "Sections", footContacts: "Contact",
+    legalTitle: "Legal",
+    callTitle: "Call", callHeading: "Pick a time to talk", callSub: "20 minutes: we look at your site and go through the task and timeline.", callCta: "Pick a time", callFallback: "Open the calendar in a new tab",
+    cookieSettings: "Cookie settings",
+    legalHeading: "Legal and data", legalSub: "Full texts. The contract and invoice are sent separately before work starts.",
+    cookieText: "We use cookies so the site works properly and we can see visit statistics.", cookieAccept: "Accept", cookieEssential: "Only essential", cookieMore: "Details",
+    footNote: "Website redesign"
+  }
+};
+
+const CODES = ["ru", "uk", "hu", "en"];
+
+class Component extends DCLogic {
+  state = { lang: null, ba: 45, open: null, cookie: "pending", legal: null, doc: "privacy" };
+
+  componentDidMount() {
+    import("./legal.js").then(m => this.setState({ legal: m.default })).catch(() => {});
+    this.mountCal();
+    // Animated by writing styles straight to the DOM — a per-frame setState
+    // would re-render the whole page and stutter.
+    const stops = [45, 22, 72, 4, 62, 30, 96, 40, 18, 78, 2, 55, 98, 35];
+    const edge = v => v < 8 || v > 92;
+    const ease = p => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+    let i = 0;
+    this._t0 = performance.now();
+    const loop = now => {
+      if (!this._auto) return;
+      const from = stops[i % stops.length];
+      const to = stops[(i + 1) % stops.length];
+      const span = edge(to) ? 2600 : 1800;
+      const hold = edge(to) ? 550 : 220;
+      const el = now - this._t0;
+      if (el > span + hold) { this._t0 = now; i++; }
+      else this.paintBa(from + (to - from) * ease(Math.min(1, el / span)));
+      this._raf = requestAnimationFrame(loop);
+    };
+    this._auto = true;
+    this._raf = requestAnimationFrame(loop);
+    let stored = null;
+    try { stored = localStorage.getItem("slapa-cookie-consent"); } catch (e) {}
+    this.setState({ cookie: stored || "pending" });
+  }
+
+  get lang() {
+    const l = this.state.lang || this.props.lang || "ru";
+    return DICT[l] ? l : "ru";
+  }
+
+  // Official Cal.com inline embed — it injects its own iframe into #slapa-cal.
+  mountCal() {
+    const link = (this.props.calLink || "https://cal.com/slapa.agency/20min").replace(/^https?:\/\/(?:www\.)?cal\.com\//, "").replace(/\/$/, "");
+    const boot = () => {
+      const host = document.getElementById("slapa-cal");
+      if (!host || !window.Cal || host.dataset.calReady) return;
+      // Cal measures the container once, so wait until it has its real width
+      if (host.getBoundingClientRect().width < 200) { setTimeout(boot, 200); return; }
+      host.dataset.calReady = "1";
+      window.Cal("init", { origin: "https://cal.com" });
+      window.Cal("inline", { elementOrSelector: "#slapa-cal", calLink: link, layout: "month_view" });
+      window.Cal("ui", { hideEventTypeDetails: false, layout: "month_view", theme: "dark" });
+      // hide the manual fallback only once Cal's own iframe is really in place
+      let lastW = Math.round(host.getBoundingClientRect().width);
+      const check = setInterval(() => {
+        const frame = host.querySelector("iframe");
+        const fb = host.querySelector("[data-cal-fallback]");
+        if (frame && fb) { fb.style.display = "none"; clearInterval(check); }
+      }, 300);
+      setTimeout(() => clearInterval(check), 10000);
+      // re-ask Cal for the month view when the column width changes materially
+      this._ro = new ResizeObserver(() => {
+        const w = Math.round(host.getBoundingClientRect().width);
+        if (Math.abs(w - lastW) < 80) return;
+        lastW = w;
+        clearTimeout(this._reflow);
+        this._reflow = setTimeout(() => {
+          window.Cal("ui", { layout: "month_view", theme: "dark" });
+        }, 250);
+      });
+      this._ro.observe(host);
+    };
+    // Cal's loader expects its own queue stub to exist before embed.js runs.
+    if (!window.Cal) {
+      const w = window, d = document;
+      let p = function (a, ar) { a.q.push(ar); };
+      const api = function () { const ar = arguments; if (!api.q) api.q = []; p(api, ar); };
+      w.Cal = w.Cal || api;
+      w.Cal.q = w.Cal.q || [];
+      w.Cal.ns = {};
+      w.Cal.loaded = false;
+      if (!d.getElementById("cal-embed-js")) {
+        const s = d.createElement("script");
+        s.id = "cal-embed-js";
+        s.src = "https://app.cal.com/embed/embed.js";
+        s.async = true;
+        d.head.appendChild(s);
+      }
+    }
+    boot();
+  }
+
+  paintBa(pct) {
+    const v = Math.max(0, Math.min(100, pct));
+    if (!this._clip) this._clip = document.querySelector("[data-ba-clip]");
+    if (!this._line) this._line = document.querySelector("[data-ba-line]");
+    if (this._clip) this._clip.style.clipPath = "inset(0 " + (100 - v).toFixed(2) + "% 0 0)";
+    if (this._line) this._line.style.left = v.toFixed(2) + "%";
+  }
+
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    clearTimeout(this._reflow);
+    this._auto = false;
+    cancelAnimationFrame(this._raf);
+  }
+
+  setCookie(value) {
+    try { localStorage.setItem("slapa-cookie-consent", value); } catch (e) {}
+    this.setState({ cookie: value });
+  }
+
+  renderVals() {
+    const lang = this.lang;
+    const t = DICT[lang];
+    const legalPack = this.state.legal ? this.state.legal[lang] || this.state.legal.en : null;
+    const activeDoc = legalPack ? legalPack.docs.find(d => d.id === this.state.doc) || legalPack.docs[0] : null;
+    const calLink = this.props.calLink || "https://cal.com/slapa.agency/20min";
+    const openIdx = this.state.open === null ? (this.props.faqStartOpen === false ? -1 : 0) : this.state.open;
+
+    return {
+      t,
+      showMarquee: this.props.showMarquee !== false,
+      showMockup: this.props.showMockup !== false,
+      langs: CODES.map(code => ({
+        code: code === "uk" ? "UA" : code.toUpperCase(),
+        pick: () => this.setState({ lang: code }),
+        style: `padding: 6px 10px; border: 0; cursor: pointer; letter-spacing: 0.08em; border-radius: 999px; background: ${code === lang ? "#0A0A0A" : "transparent"}; color: ${code === lang ? "#F2EFEA" : "rgba(10,10,10,0.6)"}; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500`
+      })),
+      // cards 2 (migration/domain) and 3 (speed/fixes) are text-only
+      services: t.services.map((s, i) => ({ num: "0" + (i + 1), title: s[0], text: s[1], slot: s[2], slotId: "slapa-service-" + i, hasImage: i < 2,
+        cardStyle: "display: flex; flex-direction: column; gap: 22px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px; " + (i < 2 ? "padding: 16px 16px 30px" : "padding: 34px 30px 36px; justify-content: center") })),
+      cases: t.cases.map((c, i) => ({ name: c[0], text: c[1], tag: c[2], url: c[3].replace(/^https?:\/\//, ""), href: c[3], slot: t.caseSlot, slotId: "slapa-case-" + i })),
+      faqs: t.faqs.map((f, i) => ({
+        q: f[0], a: f[1],
+        open: openIdx === i,
+        sign: openIdx === i ? "−" : "+",
+        toggle: () => this.setState({ open: openIdx === i ? -1 : i })
+      })),
+
+      dragStart: e => {
+        e.preventDefault();
+        this._auto = false;
+        cancelAnimationFrame(this._raf);
+        const frame = e.currentTarget.closest("[data-ba-frame]");
+        if (!frame) return;
+        const rect = frame.getBoundingClientRect();
+        let pending = null;
+        const flush = () => {
+          this._dragRaf = null;
+          if (pending !== null) this.paintBa(pending);
+        };
+        const move = ev => {
+          pending = ((ev.clientX - rect.left) / rect.width) * 100;
+          if (!this._dragRaf) this._dragRaf = requestAnimationFrame(flush);
+        };
+        const up = () => {
+          if (this._dragRaf) { cancelAnimationFrame(this._dragRaf); this._dragRaf = null; }
+          window.removeEventListener("pointermove", move);
+          window.removeEventListener("pointerup", up);
+        };
+        window.addEventListener("pointermove", move);
+        window.addEventListener("pointerup", up);
+      },
+      showCookies: this.state.cookie === "pending",
+      cookieAccept: () => this.setCookie("all"),
+      cookieEssential: () => this.setCookie("essential"),
+      cookieReset: () => this.setCookie("pending"),
+      calLink: calLink,
+      calEmbed: calLink + (calLink.includes("?") ? "&" : "?") + "embed=true&theme=dark&layout=month_view",
+      legalUpdated: legalPack ? legalPack.updated : "",
+      legalController: legalPack ? legalPack.controller : "",
+      legalTabs: (legalPack ? legalPack.docs : []).map(d => ({
+        title: d.title,
+        count: String(d.sections.length).padStart(2, "0"),
+        pick: () => this.setState({ doc: d.id }),
+        style: `display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 15px 18px; text-align: left; cursor: pointer; border-radius: 16px; font-family: inherit; font-size: 15px; font-weight: ${d.id === this.state.doc ? 700 : 500}; background: ${d.id === this.state.doc ? "#E9804A" : "transparent"}; color: ${d.id === this.state.doc ? "#0A0A0A" : "rgba(242,239,234,0.72)"}; border: 1px solid ${d.id === this.state.doc ? "#E9804A" : "rgba(242,239,234,0.12)"}`
+      })),
+      legalDocTitle: activeDoc ? activeDoc.title : "",
+      legalDocLede: activeDoc ? activeDoc.lede : "",
+      legalSections: activeDoc
+        ? activeDoc.sections.map((s, i) => ({ num: String(i + 1).padStart(2, "0"), h: s[0], p: s[1] }))
+        : [],
+      openCookieDoc: () => this.setState({ doc: "cookies" }),
+      openPrivacyDoc: () => this.setState({ doc: "privacy" })
+    };
+  }
+}
+</script>
+</body>
+</html>
