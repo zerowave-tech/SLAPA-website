@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- One page, four languages selected with ?lang=. Each entry lists every
+       alternate, including itself, as Google requires for hreflang sets. -->
+  <url>
+    <loc>https://slapa.agency/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://slapa.agency/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://slapa.agency/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://slapa.agency/?lang=hu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slapa.agency/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slapa.agency/"/>
+  </url>
+  <url>
+    <loc>https://slapa.agency/?lang=uk</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://slapa.agency/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://slapa.agency/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://slapa.agency/?lang=hu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slapa.agency/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slapa.agency/"/>
+  </url>
+  <url>
+    <loc>https://slapa.agency/?lang=hu</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://slapa.agency/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://slapa.agency/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://slapa.agency/?lang=hu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slapa.agency/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slapa.agency/"/>
+  </url>
+  <url>
+    <loc>https://slapa.agency/?lang=en</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://slapa.agency/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://slapa.agency/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="hu" href="https://slapa.agency/?lang=hu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slapa.agency/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slapa.agency/"/>
+  </url>
+</urlset>

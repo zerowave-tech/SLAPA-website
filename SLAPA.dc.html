@@ -1,36 +1,276 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<title>Редизайн старых сайтов и мобильная версия — SLAPA</title>
+<meta name="description" content="Переделываем старые сайты: новое оформление, продуманная мобильная версия, перенос содержимого и смена домена с редиректами. Оценка после короткого звонка — агентство SLAPA.">
+<link rel="canonical" href="https://slapa.agency/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="color-scheme" content="dark">
+<meta name="author" content="SLAPA">
+<meta name="generator" content="SLAPA">
+
+<!-- The four languages live on one URL and are switched client-side, so every
+     hreflang points at the same document with a ?lang= selector. -->
+<link rel="alternate" hreflang="ru" href="https://slapa.agency/">
+<link rel="alternate" hreflang="uk" href="https://slapa.agency/?lang=uk">
+<link rel="alternate" hreflang="hu" href="https://slapa.agency/?lang=hu">
+<link rel="alternate" hreflang="en" href="https://slapa.agency/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://slapa.agency/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SLAPA">
+<meta property="og:url" content="https://slapa.agency/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="uk_UA">
+<meta property="og:locale:alternate" content="hu_HU">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Редизайн старых сайтов и мобильная версия — SLAPA">
+<meta property="og:description" content="Переделываем старые сайты: новое оформление, продуманная мобильная версия, перенос содержимого и смена домена с редиректами.">
+<meta property="og:image" content="https://slapa.agency/assets/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SLAPA — редизайн сайтов">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Редизайн старых сайтов и мобильная версия — SLAPA">
+<meta name="twitter:description" content="Переделываем старые сайты: новое оформление, продуманная мобильная версия, перенос содержимого и смена домена с редиректами.">
+<meta name="twitter:image" content="https://slapa.agency/assets/og-image.png">
+<meta name="twitter:image:alt" content="SLAPA — редизайн сайтов">
+
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- support.js pulls React/ReactDOM from unpkg before it can render anything,
+     so warming that origin and pre-fetching both UMD bundles here removes a
+     whole serial round-trip from first paint. The integrity hashes must stay
+     equal to REACT_SRI / REACT_DOM_SRI in support.js or the preload is wasted. -->
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preload" as="script" href="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin>
+<link rel="preload" as="script" href="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Both families are variable fonts: a `400..900` range is one file, where the
+     enumerated `400;500;700;800;900` list was several — and it also covers the
+     600 weight the layout uses (previously synthesised by the browser). -->
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400..900&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/hero.webp" fetchpriority="high">
+
 <style>
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: #0A0A0A; color: #F2EFEA; font-family: Onest, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 104px; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: #0A0A0A; color: #F2EFEA; font-family: Onest, "Segoe UI", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  img, svg, video { max-width: 100%; }
   a { color: inherit; text-decoration: none; }
   a:hover { color: #E9804A; }
   ::selection { background: #E9804A; color: #0A0A0A; }
   input, textarea, button { font-family: inherit; }
+  :focus-visible { outline: 2px solid #E9804A; outline-offset: 3px; border-radius: 8px; }
   @keyframes slapa-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .slapa-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+  /* Layout lives in inline `style` attributes on the template, so every
+     breakpoint override has to out-rank it — hence the !important run. */
+  @media (max-width: 1080px) {
+    [data-sl="sec"] { padding-top: 96px !important; }
+    [data-sl="faq-grid"], [data-sl="legal-grid"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+    [data-sl="sticky"] { position: static !important; top: auto !important; }
+    [data-sl="foot-grid"] { grid-template-columns: 1fr 1fr !important; gap: 34px !important; }
+  }
+  @media (max-width: 860px) {
+    [data-sl="grid2"] { grid-template-columns: 1fr !important; }
+    [data-sl="hero"] { padding-top: 78px !important; }
+    [data-sl="contact"] { margin-top: 96px !important; padding: 40px 22px !important; }
+    [data-sl="legal-art"] { padding: 28px 22px 34px !important; }
+    [data-sl="frame"] { border-radius: 22px !important; padding: 8px !important; }
+  }
+  @media (max-width: 720px) {
+    html { scroll-padding-top: 132px; }
+    [data-sl="shell"] { padding: 0 14px 14px !important; }
+    [data-sl="sec"] { padding-top: 78px !important; }
+    [data-sl="hdr"] { top: 8px !important; flex-wrap: wrap !important; border-radius: 24px !important; padding: 10px 12px !important; row-gap: 6px !important; }
+    /* Nav drops to its own row and scrolls sideways instead of wrapping into
+       a three-line header on a 375px screen. */
+    [data-sl="nav"] { order: 3; width: 100%; flex-wrap: nowrap !important; overflow-x: auto; justify-content: flex-start !important; gap: 0 18px !important; padding: 2px 4px 4px; scrollbar-width: none; -ms-overflow-style: none; }
+    [data-sl="nav"]::-webkit-scrollbar { display: none; }
+    [data-sl="nav"] a { white-space: nowrap; }
+    [data-sl="cta"] { padding: 10px 16px !important; font-size: 13px !important; }
+    [data-sl="foot-grid"] { grid-template-columns: 1fr !important; gap: 28px !important; }
+    [data-sl="footbar"] { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+    [data-sl="cookie"] { left: 12px !important; right: 12px !important; bottom: 12px !important; padding: 16px !important; gap: 14px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    [data-sl="marquee"] { animation: none !important; }
+  }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://slapa.agency/#organization",
+      "name": "SLAPA",
+      "alternateName": "SLAPA Agency",
+      "url": "https://slapa.agency/",
+      "slogan": "Редизайн сайтов",
+      "description": "Агентство редизайна: переделываем старые сайты — новое оформление, мобильная версия, перенос содержимого, смена домена и редиректы, работа над скоростью.",
+      "email": "hello@slapa.agency",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://slapa.agency/#logo",
+        "url": "https://slapa.agency/assets/icon-512.png",
+        "contentUrl": "https://slapa.agency/assets/icon-512.png",
+        "width": 512,
+        "height": 512,
+        "caption": "SLAPA"
+      },
+      "image": { "@id": "https://slapa.agency/#logo" },
+      "sameAs": ["https://t.me/slapa"],
+      "knowsLanguage": ["ru", "uk", "hu", "en"],
+      "priceRange": "$$",
+      "areaServed": [
+        { "@type": "Country", "name": "Hungary" },
+        { "@type": "Country", "name": "Ukraine" },
+        { "@type": "Place", "name": "Europe" }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "hello@slapa.agency",
+        "url": "https://cal.com/slapa.agency/20min",
+        "availableLanguage": ["Russian", "Ukrainian", "Hungarian", "English"]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Редизайн сайта", "description": "Полностью новое оформление на основе того, что у вас уже есть: структура, типографика, сетка, состояния." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Мобильная версия сайта", "description": "Отдельно продуманные мобильные экраны, а не сжатая версия десктопа." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Перенос сайта и смена домена", "description": "Переносим содержимое на новую площадку, меняем домен и настраиваем редиректы со старых адресов." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Скорость и правки после запуска", "description": "Убираем лишний вес, чиним вёрстку и остаёмся рядом на время правок после запуска." } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://slapa.agency/#website",
+      "url": "https://slapa.agency/",
+      "name": "SLAPA",
+      "description": "Агентство редизайна сайтов",
+      "publisher": { "@id": "https://slapa.agency/#organization" },
+      "inLanguage": ["ru", "uk", "hu", "en"]
+    },
+    {
+      "@type": ["WebPage", "FAQPage"],
+      "@id": "https://slapa.agency/#webpage",
+      "url": "https://slapa.agency/",
+      "name": "Редизайн старых сайтов и мобильная версия — SLAPA",
+      "description": "Переделываем старые сайты: новое оформление, продуманная мобильная версия, перенос содержимого и смена домена с редиректами.",
+      "isPartOf": { "@id": "https://slapa.agency/#website" },
+      "about": { "@id": "https://slapa.agency/#organization" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://slapa.agency/assets/og-image.png",
+        "width": 1200,
+        "height": 630
+      },
+      "inLanguage": "ru",
+      "mainEntity": [
+        { "@type": "Question", "name": "Сколько занимает редизайн?", "acceptedAnswer": { "@type": "Answer", "text": "Небольшой сайт на несколько страниц — 2–3 недели. Крупные проекты разбиваем на этапы и согласовываем сроки заранее." } },
+        { "@type": "Question", "name": "Нужно ли переписывать тексты?", "acceptedAnswer": { "@type": "Answer", "text": "Не обязательно. Мы работаем с вашими текстами, а если нужно — предложим правки структуры и заголовков." } },
+        { "@type": "Question", "name": "Что если сайт сделан на старой платформе?", "acceptedAnswer": { "@type": "Answer", "text": "Смотрим, что есть, и предлагаем варианты: остаться на той же платформе или перенести содержимое на новую." } },
+        { "@type": "Question", "name": "Можно ли сменить домен?", "acceptedAnswer": { "@type": "Answer", "text": "Да. Настраиваем новый домен и редиректы со старых адресов, чтобы не потерять переходы." } },
+        { "@type": "Question", "name": "Как считается стоимость?", "acceptedAnswer": { "@type": "Answer", "text": "По объёму: количество страниц, сложность оформления, мобильная версия, перенос. Оценку присылаем после короткого разговора." } }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://slapa.agency/#work",
+      "name": "Кейсы SLAPA",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 4,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "url": "https://sikra.agency/", "name": "Sikra — веб и мобильная версия сайта студии" },
+        { "@type": "ListItem", "position": 2, "url": "https://perfect-smile-website-silk.vercel.app/", "name": "Perfect Smile — сайт стоматологии" },
+        { "@type": "ListItem", "position": 3, "url": "https://ekft.vercel.app/", "name": "Épitő-szerelő Kft. — сайт строительно-монтажной компании" },
+        { "@type": "ListItem", "position": 4, "url": "https://ferfikez.vercel.app/", "name": "Férfikéz Egy Óra — сайт мастерской по ремонту часов" }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="./support.js"></script>
+</head>
+<body>
+<!-- Every visible word on this page is rendered by React after support.js
+     boots. Crawlers and previewers that do not execute JS (and the page
+     itself if unpkg is unreachable) would otherwise see an empty document,
+     so the primary content is repeated here as static markup. -->
+<noscript>
+  <div style="max-width: 900px; margin: 0 auto; padding: 48px 20px; font-family: Onest, 'Segoe UI', Helvetica, Arial, sans-serif; color: #F2EFEA">
+    <p style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #E9804A; margin: 0 0 8px">SLAPA — переделка старых сайтов</p>
+    <h1 style="font-size: 44px; line-height: 1.05; margin: 0 0 16px">Редизайн сайтов</h1>
+    <p style="font-size: 18px; line-height: 1.5; color: rgba(242,239,234,0.8); margin: 0 0 36px">Берём ваш старый сайт и переделываем под новый лад: свежее оформление, мобильная версия, при необходимости — перенос и смена домена.</p>
+
+    <h2 style="font-size: 26px; margin: 0 0 12px">Что делаем</h2>
+    <ul style="font-size: 16px; line-height: 1.6; color: rgba(242,239,234,0.78); padding-left: 20px; margin: 0 0 36px">
+      <li><strong>Редизайн.</strong> Полностью новое оформление на основе того, что у вас уже есть. Структура, типографика, сетка, состояния.</li>
+      <li><strong>Мобильная версия.</strong> Отдельно продуманные мобильные экраны, а не сжатая версия десктопа.</li>
+      <li><strong>Перенос и домен.</strong> Переносим содержимое на новую площадку, при необходимости меняем домен и настраиваем редиректы.</li>
+      <li><strong>Скорость и правки.</strong> Убираем лишний вес, чиним вёрстку и остаёмся рядом на время правок после запуска.</li>
+    </ul>
+
+    <h2 style="font-size: 26px; margin: 0 0 12px">Кейсы</h2>
+    <ul style="font-size: 16px; line-height: 1.6; color: rgba(242,239,234,0.78); padding-left: 20px; margin: 0 0 36px">
+      <li><a href="https://sikra.agency/" style="color: #E9804A">Sikra</a> — веб и мобильная версия сайта студии.</li>
+      <li><a href="https://perfect-smile-website-silk.vercel.app/" style="color: #E9804A">Perfect Smile</a> — сайт стоматологии: чистая структура, акцент на услугах и записи на приём.</li>
+      <li><a href="https://ekft.vercel.app/" style="color: #E9804A">Épitő-szerelő Kft.</a> — сайт строительно-монтажной компании в Венгрии.</li>
+      <li><a href="https://ferfikez.vercel.app/" style="color: #E9804A">Férfikéz Egy Óra</a> — сайт мастерской по ремонту часов.</li>
+    </ul>
+
+    <h2 style="font-size: 26px; margin: 0 0 12px">Что обычно спрашивают</h2>
+    <dl style="font-size: 16px; line-height: 1.6; color: rgba(242,239,234,0.78); margin: 0 0 36px">
+      <dt style="font-weight: 700; margin-top: 14px">Сколько занимает редизайн?</dt>
+      <dd style="margin: 4px 0 0">Небольшой сайт на несколько страниц — 2–3 недели. Крупные проекты разбиваем на этапы и согласовываем сроки заранее.</dd>
+      <dt style="font-weight: 700; margin-top: 14px">Нужно ли переписывать тексты?</dt>
+      <dd style="margin: 4px 0 0">Не обязательно. Мы работаем с вашими текстами, а если нужно — предложим правки структуры и заголовков.</dd>
+      <dt style="font-weight: 700; margin-top: 14px">Что если сайт сделан на старой платформе?</dt>
+      <dd style="margin: 4px 0 0">Смотрим, что есть, и предлагаем варианты: остаться на той же платформе или перенести содержимое на новую.</dd>
+      <dt style="font-weight: 700; margin-top: 14px">Можно ли сменить домен?</dt>
+      <dd style="margin: 4px 0 0">Да. Настраиваем новый домен и редиректы со старых адресов, чтобы не потерять переходы.</dd>
+      <dt style="font-weight: 700; margin-top: 14px">Как считается стоимость?</dt>
+      <dd style="margin: 4px 0 0">По объёму: количество страниц, сложность оформления, мобильная версия, перенос. Оценку присылаем после короткого разговора.</dd>
+    </dl>
+
+    <h2 style="font-size: 26px; margin: 0 0 12px">Связаться</h2>
+    <p style="font-size: 16px; line-height: 1.8; margin: 0">
+      <a href="mailto:hello@slapa.agency" style="color: #E9804A">hello@slapa.agency</a><br>
+      <a href="https://t.me/slapa" style="color: #E9804A">Telegram / @slapa</a><br>
+      <a href="https://cal.com/slapa.agency/20min" style="color: #E9804A">Выбрать время для 20-минутного разговора</a>
+    </p>
+  </div>
+</noscript>
+<x-dc>
+<helmet>
 <script src="./image-slot.js"></script>
 </helmet>
-<div style="max-width: 100%; overflow-x: hidden; padding: 0 20px 20px">
+<div data-sl="shell" style="max-width: 100%; overflow-x: hidden; overflow-x: clip; padding: 0 20px 20px">
 
-<header style="position: sticky; top: 16px; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: clamp(10px, 1.4vw, 20px); margin: 16px auto 0; max-width: 1360px; padding: 12px 14px 12px 20px; background: #E9804A; border: 1px solid rgba(10,10,10,0.12); border-radius: 999px; color: #0A0A0A">
-  <a href="#top" style="display: flex; align-items: center; gap: 11px; flex: 0 0 auto; color: #0A0A0A" style-hover="opacity: 0.75; color: #0A0A0A">
-    <img src="assets/slapa-mark-black.png" alt="SLAPA" style="display: block; height: 26px; width: auto" />
+<header data-sl="hdr" style="position: sticky; top: 16px; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: clamp(10px, 1.4vw, 20px); margin: 16px auto 0; max-width: 1360px; padding: 12px 14px 12px 20px; background: #E9804A; border: 1px solid rgba(10,10,10,0.12); border-radius: 999px; color: #0A0A0A">
+  <a href="#top" aria-label="SLAPA — {{ t.homeLabel }}" style="display: flex; align-items: center; gap: 11px; flex: 0 0 auto; color: #0A0A0A" style-hover="opacity: 0.75; color: #0A0A0A">
+    <img src="assets/slapa-mark-black.png" alt="" width="78" height="105" style="display: block; height: 26px; width: auto" />
     <span style="font-size: 18px; font-weight: 800; letter-spacing: 0.16em">SLAPA</span>
   </a>
-  <nav style="display: flex; align-items: center; flex: 1 1 auto; min-width: 0; justify-content: center; flex-wrap: wrap; gap: 6px clamp(12px, 1.6vw, 26px); font-size: 14px; font-weight: 600">
+  <nav data-sl="nav" aria-label="{{ t.navLabel }}" style="display: flex; align-items: center; flex: 1 1 auto; min-width: 0; justify-content: center; flex-wrap: wrap; gap: 6px clamp(12px, 1.6vw, 26px); font-size: 14px; font-weight: 600">
     <a href="#services" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navServices }}</a>
     <a href="#cases" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navCases }}</a>
     <a href="#faq" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navFaq }}</a>
@@ -38,22 +278,22 @@
     <a href="#legal" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.legalTitle }}</a>
   </nav>
   <div style="display: flex; align-items: center; flex: 0 0 auto; gap: 10px">
-    <div style="display: flex; gap: 2px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px">
+    <div role="group" aria-label="{{ t.langLabel }}" style="display: flex; gap: 2px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px">
       <sc-for list="{{ langs }}" as="l" hint-placeholder-count="4">
-        <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}">{{ l.code }}</button>
+        <button type="button" onClick="{{ l.pick }}" aria-label="{{ l.label }}" aria-pressed="{{ l.active }}" lang="{{ l.lang }}" style="{{ l.style }}">{{ l.code }}</button>
       </sc-for>
     </div>
-    <a href="#contact" style="padding: 12px 22px; background: #0A0A0A; color: #F2EFEA; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA; color: #0A0A0A">{{ t.callCta }}</a>
+    <a href="#contact" data-sl="cta" style="padding: 12px 22px; background: #0A0A0A; color: #F2EFEA; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA; color: #0A0A0A">{{ t.callCta }}</a>
   </div>
 </header>
 
-<section id="top" style="position: relative; max-width: 1360px; margin: 0 auto; padding: 108px 0 0; overflow: hidden">
+<section id="top" data-sl="hero" aria-labelledby="slapa-h1" style="position: relative; max-width: 1360px; margin: 0 auto; padding: 108px 0 0; overflow: hidden">
   <div style="position: absolute; top: -220px; left: 50%; transform: translateX(-50%); width: 900px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.34), rgba(232,129,75,0)); pointer-events: none"></div>
   <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px">
     <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border: 1px solid rgba(242,239,234,0.14); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.72); white-space: nowrap">
       <span style="width: 6px; height: 6px; border-radius: 999px; background: #E9804A"></span>{{ t.eyebrow }}
     </span>
-    <h1 style="margin: 0; max-width: 16ch; font-size: clamp(46px, 7.4vw, 116px); line-height: 1; font-weight: 900; letter-spacing: -0.04em; text-wrap: balance">{{ t.h1 }}</h1>
+    <h1 id="slapa-h1" style="margin: 0; max-width: 16ch; font-size: clamp(46px, 7.4vw, 116px); line-height: 1; font-weight: 900; letter-spacing: -0.04em; text-wrap: balance">{{ t.h1 }}</h1>
     <p style="margin: 0; max-width: 58ch; font-size: 19px; line-height: 1.5; color: rgba(242,239,234,0.66); text-wrap: pretty">{{ t.heroSub }}</p>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px">
       <a href="#contact" style="padding: 17px 30px; background: #E9804A; color: #0A0A0A; border-radius: 999px; font-size: 15px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA">{{ t.callCta }}</a>
@@ -61,15 +301,16 @@
     </div>
   </div>
   <sc-if value="{{ showMockup }}" hint-placeholder-val="{{ true }}">
-    <div style="position: relative; margin-top: 64px; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px; background: #121212; padding: 12px">
+    <figure data-sl="frame" style="position: relative; margin: 64px 0 0; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px; background: #121212; padding: 12px">
       <div style="position: relative; aspect-ratio: 16 / 8; border-radius: 20px; overflow: hidden">
-        <image-slot id="slapa-hero" shape="rect" placeholder="{{ t.heroSlot }}"></image-slot>
+        <image-slot id="slapa-hero" shape="rect" src="assets/img/hero.webp" placeholder="{{ t.heroSlot }}"></image-slot>
       </div>
-    </div>
+      <figcaption class="slapa-sr">{{ t.heroSlot }}</figcaption>
+    </figure>
   </sc-if>
   <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
-    <div style="margin-top: 30px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)">
-      <div style="display: flex; width: max-content; animation: slapa-marquee 34s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.4)">
+    <div aria-hidden="true" style="margin-top: 30px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)">
+      <div data-sl="marquee" style="display: flex; width: max-content; animation: slapa-marquee 34s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.52)">
         <span style="padding-right: 28px">{{ t.marquee }}</span>
         <span style="padding-right: 28px">{{ t.marquee }}</span>
       </div>
@@ -77,18 +318,19 @@
   </sc-if>
 </section>
 
-<section id="services" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section id="services" data-sl="sec" aria-labelledby="slapa-services-h" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">01 — {{ t.navServices }}</span>
-    <h2 style="margin: 0; max-width: 22ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.servicesTitle }}</h2>
+    <h2 id="slapa-services-h" style="margin: 0; max-width: 22ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.servicesTitle }}</h2>
     <p style="margin: 0; max-width: 52ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.servicesSub }}</p>
   </div>
-  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px">
+  <div data-sl="grid2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px">
     <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
       <div style="{{ s.cardStyle }}" style-hover="border-color: rgba(232,129,75,0.55)">
         <sc-if value="{{ s.hasImage }}" hint-placeholder-val="{{ true }}">
         <div style="position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden">
-          <image-slot id="{{ s.slotId }}" shape="rect" placeholder="{{ s.slot }}"></image-slot>
+          <!-- data-img, not src: see syncSlotImages() -->
+          <image-slot id="{{ s.slotId }}" shape="rect" data-img="{{ s.img }}" placeholder="{{ s.slot }}"></image-slot>
         </div>
         </sc-if>
         <div style="display: flex; flex-direction: column; gap: 10px; padding: 0 14px">
@@ -103,22 +345,22 @@
   </div>
 </section>
 
-<section style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section id="before-after" data-sl="sec" aria-labelledby="slapa-ba-h" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">02 — {{ t.baTitle }}</span>
-    <h2 style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.baHeading }}</h2>
-    <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.5); white-space: nowrap">{{ t.baHint }}</p>
+    <h2 id="slapa-ba-h" style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.baHeading }}</h2>
+    <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.62); white-space: nowrap">{{ t.baHint }}</p>
   </div>
-  <div style="padding: 12px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px">
+  <div data-sl="frame" style="padding: 12px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px">
     <div data-ba-frame="1" style="position: relative; aspect-ratio: 16 / 8.5; border-radius: 20px; overflow: hidden; user-select: none">
       <div style="position: absolute; inset: 0; background: #161616">
-        <image-slot id="slapa-after" shape="rect" src="assets/ba-after.png" placeholder="{{ t.afterSlot }}"></image-slot>
+        <image-slot id="slapa-after" shape="rect" src="assets/img/after.webp" placeholder="{{ t.afterSlot }}"></image-slot>
       </div>
       <div data-ba-clip="1" style="position: absolute; inset: 0; clip-path: inset(0 55% 0 0); background: #1F1B18; will-change: clip-path">
-        <image-slot id="slapa-before" shape="rect" src="assets/ba-before.png" placeholder="{{ t.beforeSlot }}"></image-slot>
+        <image-slot id="slapa-before" shape="rect" src="assets/img/before.webp" placeholder="{{ t.beforeSlot }}"></image-slot>
       </div>
       <div data-ba-line="1" style="position: absolute; top: 0; bottom: 0; left: 45%; width: 2px; background: #F2EFEA; pointer-events: none; will-change: left">
-        <div role="slider" onPointerDown="{{ dragStart }}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54px; height: 54px; border-radius: 999px; background: #F2EFEA; color: #0A0A0A; display: grid; place-items: center; font-size: 15px; font-weight: 700; cursor: col-resize; pointer-events: auto; touch-action: none">↔</div>
+        <div data-ba-handle="1" role="slider" tabindex="0" aria-label="{{ t.baHint }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45" aria-valuetext="45%" aria-orientation="horizontal" onPointerDown="{{ dragStart }}" onKeyDown="{{ baKey }}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54px; height: 54px; border-radius: 999px; background: #F2EFEA; color: #0A0A0A; display: grid; place-items: center; font-size: 15px; font-weight: 700; cursor: col-resize; pointer-events: auto; touch-action: none">↔</div>
       </div>
       <div style="position: absolute; top: 18px; left: 18px; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #0A0A0A; background: #F2EFEA; padding: 5px 11px; border-radius: 999px">{{ t.beforeTag }}</div>
       <div style="position: absolute; top: 18px; right: 18px; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #0A0A0A; background: #F2EFEA; padding: 5px 11px; border-radius: 999px">{{ t.afterTag }}</div>
@@ -126,17 +368,18 @@
   </div>
 </section>
 
-<section id="cases" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section id="cases" data-sl="sec" aria-labelledby="slapa-cases-h" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">03 — {{ t.navCases }}</span>
-    <h2 style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.casesTitle }}</h2>
+    <h2 id="slapa-cases-h" style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.casesTitle }}</h2>
     <p style="margin: 0; max-width: 50ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.casesSub }}</p>
   </div>
-  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px" data-note="case-grid">
+  <div data-sl="grid2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px" data-note="case-grid">
     <sc-for list="{{ cases }}" as="c" hint-placeholder-count="4">
       <article style="display: flex; flex-direction: column; gap: 20px; padding: 14px 14px 26px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px; color: inherit" style-hover="border-color: rgba(233,128,74,0.55)">
         <div style="position: relative; aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden">
-          <image-slot id="{{ c.slotId }}" shape="rect" placeholder="{{ c.slot }}"></image-slot>
+          <!-- data-img, not src: see syncSlotImages() -->
+          <image-slot id="{{ c.slotId }}" shape="rect" data-img="{{ c.img }}" placeholder="{{ c.slot }}"></image-slot>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px; padding: 0 14px">
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
@@ -144,49 +387,54 @@
             <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #E9804A">{{ c.tag }}</span>
           </div>
           <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgba(242,239,234,0.62); text-wrap: pretty">{{ c.text }}</p>
-          <a href="{{ c.href }}" target="_blank" rel="noopener" style="margin-top: 4px; align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(242,239,234,0.5)" style-hover="color: #E9804A">{{ c.url }} ↗</a>
+          <a href="{{ c.href }}" target="_blank" rel="noopener" aria-label="{{ c.linkLabel }}" style="margin-top: 4px; align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(242,239,234,0.62)" style-hover="color: #E9804A">{{ c.url }} ↗</a>
         </div>
       </article>
     </sc-for>
   </div>
 </section>
 
-<section id="faq" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
-  <div style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 60px; align-items: start">
-    <div style="display: flex; flex-direction: column; gap: 18px; position: sticky; top: 110px">
+<section id="faq" data-sl="sec" aria-labelledby="slapa-faq-h" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+  <div data-sl="faq-grid" style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 60px; align-items: start">
+    <div data-sl="sticky" style="display: flex; flex-direction: column; gap: 18px; position: sticky; top: 110px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">04 — FAQ</span>
-      <h2 style="margin: 0; font-size: clamp(32px, 4.2vw, 58px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.faqTitle }}</h2>
+      <h2 id="slapa-faq-h" style="margin: 0; font-size: clamp(32px, 4.2vw, 58px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.faqTitle }}</h2>
       <p style="margin: 0; max-width: 34ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.faqSub }}</p>
     </div>
     <div style="display: flex; flex-direction: column; gap: 12px">
       <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
         <div style="background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 22px; overflow: hidden">
-          <button type="button" onClick="{{ f.toggle }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 24px 26px; background: none; border: 0; cursor: pointer; text-align: left; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; color: inherit" style-hover="color: #E9804A">
-            <span>{{ f.q }}</span>
-            <span style="flex-shrink: 0; width: 30px; height: 30px; border-radius: 999px; background: rgba(242,239,234,0.08); display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 16px">{{ f.sign }}</span>
-          </button>
-          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+          <h3 style="margin: 0">
+            <button type="button" onClick="{{ f.toggle }}" id="{{ f.btnId }}" aria-expanded="{{ f.expanded }}" aria-controls="{{ f.panelId }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 24px 26px; background: none; border: 0; cursor: pointer; text-align: left; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; color: inherit; font-family: inherit" style-hover="color: #E9804A">
+              <span>{{ f.q }}</span>
+              <span aria-hidden="true" style="flex-shrink: 0; width: 30px; height: 30px; border-radius: 999px; background: rgba(242,239,234,0.08); display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 16px">{{ f.sign }}</span>
+            </button>
+          </h3>
+          <!-- Collapsed answers stay in the DOM and are hidden with CSS instead
+               of being unmounted — an sc-if here kept four of the five answers
+               out of the rendered page, so crawlers never saw them. -->
+          <div role="region" id="{{ f.panelId }}" aria-labelledby="{{ f.btnId }}" style="{{ f.panelStyle }}">
             <p style="margin: 0; padding: 0 26px 26px; font-size: 16px; line-height: 1.6; color: rgba(242,239,234,0.62); max-width: 62ch; text-wrap: pretty">{{ f.a }}</p>
-          </sc-if>
+          </div>
         </div>
       </sc-for>
     </div>
   </div>
 </section>
 
-<section id="contact" style="position: relative; max-width: 1360px; margin: 130px auto 0; padding: 64px 56px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 34px; overflow: hidden">
+<section id="contact" data-sl="contact" aria-labelledby="slapa-contact-h" style="position: relative; max-width: 1360px; margin: 130px auto 0; padding: 64px 56px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 34px; overflow: hidden">
   <div style="position: absolute; bottom: -260px; left: -120px; width: 700px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.3), rgba(232,129,75,0)); pointer-events: none"></div>
   <div style="position: relative; display: flex; flex-direction: column; gap: 40px">
     <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 32px">
     <div style="display: flex; flex-direction: column; gap: 22px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">05 — {{ t.navContact }}</span>
-      <h2 style="margin: 0; max-width: 18ch; font-size: clamp(34px, 4.6vw, 62px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.02">{{ t.callHeading }}</h2>
+      <h2 id="slapa-contact-h" style="margin: 0; max-width: 18ch; font-size: clamp(34px, 4.6vw, 62px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.02">{{ t.callHeading }}</h2>
       <p style="margin: 0; max-width: 38ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.64); text-wrap: pretty">{{ t.callSub }}</p>
     </div>
-      <div style="display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em">
+      <address style="display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-style: normal; letter-spacing: 0.06em">
         <a href="mailto:hello@slapa.agency">hello@slapa.agency</a>
-        <a href="https://t.me/slapa">telegram / @slapa</a>
-      </div>
+        <a href="https://t.me/slapa" target="_blank" rel="noopener">telegram / @slapa</a>
+      </address>
     </div>
     <div style="display: flex; flex-direction: column; gap: 14px">
       <div style="padding: 10px; background: #121212; border: 1px solid rgba(242,239,234,0.12); border-radius: 26px">
@@ -202,23 +450,23 @@
   </div>
 </section>
 
-<section id="legal" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section id="legal" data-sl="sec" aria-labelledby="slapa-legal-h" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">06 — {{ t.legalTitle }}</span>
-    <h2 style="margin: 0; max-width: 20ch; font-size: clamp(30px, 3.8vw, 52px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04">{{ t.legalHeading }}</h2>
+    <h2 id="slapa-legal-h" style="margin: 0; max-width: 20ch; font-size: clamp(30px, 3.8vw, 52px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04">{{ t.legalHeading }}</h2>
     <p style="margin: 0; max-width: 52ch; font-size: 16px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.legalSub }}</p>
   </div>
-  <div style="display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 40px; align-items: start">
-    <div style="position: sticky; top: 110px; display: flex; flex-direction: column; gap: 8px">
+  <div data-sl="legal-grid" style="display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 40px; align-items: start">
+    <div data-sl="sticky" role="group" aria-label="{{ t.legalTitle }}" style="position: sticky; top: 110px; display: flex; flex-direction: column; gap: 8px">
       <sc-for list="{{ legalTabs }}" as="d" hint-placeholder-count="4">
-        <button type="button" onClick="{{ d.pick }}" style="{{ d.style }}">
+        <button type="button" onClick="{{ d.pick }}" aria-pressed="{{ d.selected }}" aria-controls="slapa-legal-doc" style="{{ d.style }}">
           <span>{{ d.title }}</span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.55">{{ d.count }}</span>
+          <span aria-hidden="true" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.55">{{ d.count }}</span>
         </button>
       </sc-for>
-      <p style="margin: 14px 4px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; letter-spacing: 0.06em; color: rgba(242,239,234,0.4)">{{ legalUpdated }}<br />{{ legalController }}</p>
+      <p style="margin: 14px 4px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; letter-spacing: 0.06em; color: rgba(242,239,234,0.58)">{{ legalUpdated }}<br />{{ legalController }}</p>
     </div>
-    <article style="padding: 42px 46px 48px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px">
+    <article id="slapa-legal-doc" data-sl="legal-art" aria-live="polite" style="padding: 42px 46px 48px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px">
       <h3 style="margin: 0 0 14px; font-size: clamp(26px, 2.6vw, 36px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08">{{ legalDocTitle }}</h3>
       <p style="margin: 0 0 34px; padding-bottom: 30px; border-bottom: 1px solid rgba(242,239,234,0.1); font-size: 17px; line-height: 1.55; color: rgba(242,239,234,0.66); max-width: 66ch; text-wrap: pretty">{{ legalDocLede }}</p>
       <div style="display: flex; flex-direction: column; gap: 30px">
@@ -237,44 +485,46 @@
 </section>
 
 <footer style="max-width: 1360px; margin: 0 auto; padding: 90px 0 28px">
-  <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 44px; border-bottom: 1px solid rgba(242,239,234,0.1)">
+  <div data-sl="foot-grid" style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 44px; border-bottom: 1px solid rgba(242,239,234,0.1)">
     <div style="display: flex; flex-direction: column; gap: 14px">
       <div style="display: flex; align-items: center; gap: 11px">
-        <img src="assets/slapa-mark-orange.png" alt="SLAPA" style="display: block; height: 26px; width: auto" />
+        <img src="assets/slapa-mark-orange.png" alt="" width="78" height="105" loading="lazy" decoding="async" style="display: block; height: 26px; width: auto" />
         <span style="font-size: 18px; font-weight: 800; letter-spacing: 0.16em">SLAPA</span>
       </div>
-      <p style="margin: 0; max-width: 30ch; font-size: 15px; line-height: 1.5; color: rgba(242,239,234,0.55)">{{ t.footTagline }}</p>
+      <p style="margin: 0; max-width: 30ch; font-size: 15px; line-height: 1.5; color: rgba(242,239,234,0.62)">{{ t.footTagline }}</p>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.footNav }}</span>
+    <nav aria-label="{{ t.footNav }}" style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.6)">{{ t.footNav }}</span>
       <a href="#services">{{ t.navServices }}</a>
       <a href="#cases">{{ t.navCases }}</a>
       <a href="#faq">{{ t.navFaq }}</a>
       <a href="#contact">{{ t.navContact }}</a>
       <a href="#legal">{{ t.legalTitle }}</a>
-    </div>
+    </nav>
     <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.footContacts }}</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.6)">{{ t.footContacts }}</span>
       <a href="mailto:hello@slapa.agency">hello@slapa.agency</a>
-      <a href="https://t.me/slapa">Telegram</a>
-      <a href="https://instagram.com">Instagram</a>
+      <a href="https://t.me/slapa" target="_blank" rel="noopener me">Telegram</a>
+      <!-- TODO: точный профиль. Пока ведёт на instagram.com — такую ссылку стоит
+           либо заменить на реальный аккаунт, либо убрать из футера. -->
+      <a href="https://instagram.com" target="_blank" rel="noopener me">Instagram</a>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.legalTitle }}</span>
+    <nav aria-label="{{ t.legalTitle }}" style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.6)">{{ t.legalTitle }}</span>
       <sc-for list="{{ legalTabs }}" as="d" hint-placeholder-count="4">
         <a href="#legal" onClick="{{ d.pick }}">{{ d.title }}</a>
       </sc-for>
       <button type="button" onClick="{{ cookieReset }}" style="align-self: flex-start; padding: 0; background: none; border: 0; color: #E9804A; font-size: 15px; font-weight: 500; cursor: pointer; text-align: left" style-hover="opacity: 0.7">{{ t.cookieSettings }}</button>
-    </div>
+    </nav>
   </div>
-  <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(242,239,234,0.42)">
+  <div data-sl="footbar" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(242,239,234,0.58)">
     <span>SLAPA © 2026</span>
     <span>{{ t.footNote }}</span>
   </div>
 </footer>
 
 <sc-if value="{{ showCookies }}" hint-placeholder-val="{{ false }}">
-  <div style="position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 80; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; max-width: 1360px; margin: 0 auto; padding: 20px 24px; background: rgba(18,18,18,0.94); backdrop-filter: blur(14px); border: 1px solid rgba(242,239,234,0.14); border-radius: 24px">
+  <div data-sl="cookie" role="dialog" aria-label="{{ t.cookieTitle }}" aria-live="polite" style="position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 80; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; max-width: 1360px; margin: 0 auto; padding: 20px 24px; background: rgba(18,18,18,0.94); backdrop-filter: blur(14px); border: 1px solid rgba(242,239,234,0.14); border-radius: 24px">
     <p style="margin: 0; max-width: 62ch; font-size: 14px; line-height: 1.5; color: rgba(242,239,234,0.72)">{{ t.cookieText }} <a href="#legal" onClick="{{ openCookieDoc }}" style="text-decoration: underline; text-underline-offset: 3px">{{ t.cookieMore }}</a></p>
     <div style="display: flex; flex-wrap: wrap; gap: 10px">
       <button type="button" onClick="{{ cookieEssential }}" style="padding: 12px 20px; background: transparent; color: #F2EFEA; border: 1px solid rgba(242,239,234,0.2); border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap" style-hover="background: rgba(242,239,234,0.08)">{{ t.cookieEssential }}</button>
@@ -332,7 +582,12 @@ const DICT = {
     cookieSettings: "Настройки cookie",
     legalHeading: "Документы и данные", legalSub: "Полные тексты. Договор и счёт присылаем отдельно перед началом работы.",
     cookieText: "Мы используем cookie, чтобы сайт работал корректно и мы видели статистику посещений.", cookieAccept: "Принять", cookieEssential: "Только необходимые", cookieMore: "Подробнее",
-    footNote: "Редизайн сайтов"
+    footNote: "Редизайн сайтов",
+    seoTitle: "Редизайн старых сайтов и мобильная версия — SLAPA",
+    seoDesc: "Переделываем старые сайты: новое оформление, продуманная мобильная версия, перенос содержимого и смена домена с редиректами. Оценка после короткого звонка — агентство SLAPA.",
+    ogLocale: "ru_RU",
+    homeLabel: "на главную", navLabel: "Основная навигация", langLabel: "Язык сайта",
+    cookieTitle: "Согласие на cookie", caseLinkLabel: "Открыть сайт"
   },
   uk: {
     navServices: "Послуги", navCases: "Кейси", navFaq: "FAQ", navContact: "Контакти",
@@ -380,7 +635,12 @@ const DICT = {
     cookieSettings: "Налаштування cookie",
     legalHeading: "Документи і дані", legalSub: "Повні тексти. Договір і рахунок надсилаємо окремо перед початком роботи.",
     cookieText: "Ми використовуємо cookie, щоб сайт працював коректно і ми бачили статистику відвідувань.", cookieAccept: "Прийняти", cookieEssential: "Лише необхідні", cookieMore: "Детальніше",
-    footNote: "Редизайн сайтів"
+    footNote: "Редизайн сайтів",
+    seoTitle: "Редизайн старих сайтів і мобільна версія — SLAPA",
+    seoDesc: "Переробляємо старі сайти: нове оформлення, продумана мобільна версія, перенесення вмісту і зміна домену з редіректами. Оцінка після короткої розмови — агенція SLAPA.",
+    ogLocale: "uk_UA",
+    homeLabel: "на головну", navLabel: "Основна навігація", langLabel: "Мова сайту",
+    cookieTitle: "Згода на cookie", caseLinkLabel: "Відкрити сайт"
   },
   hu: {
     navServices: "Szolgáltatások", navCases: "Munkák", navFaq: "GYIK", navContact: "Kapcsolat",
@@ -428,7 +688,12 @@ const DICT = {
     cookieSettings: "Cookie beállítások",
     legalHeading: "Dokumentumok és adatok", legalSub: "Teljes szövegek. A szerződést és a számlát a munka előtt külön küldjük.",
     cookieText: "Cookie-kat használunk, hogy az oldal megfelelően működjön és lássuk a látogatási statisztikát.", cookieAccept: "Elfogadom", cookieEssential: "Csak a szükségesek", cookieMore: "Részletek",
-    footNote: "Weboldal redesign"
+    footNote: "Weboldal redesign",
+    seoTitle: "Weboldal redesign és mobil verzió — SLAPA",
+    seoDesc: "Régi weboldalakat építünk át: friss megjelenés, rendesen megtervezett mobil verzió, tartalomköltözés és domainváltás átirányításokkal. Árajánlat egy rövid beszélgetés után.",
+    ogLocale: "hu_HU",
+    homeLabel: "a főoldalra", navLabel: "Fő navigáció", langLabel: "Az oldal nyelve",
+    cookieTitle: "Cookie hozzájárulás", caseLinkLabel: "Weboldal megnyitása"
   },
   en: {
     navServices: "Services", navCases: "Work", navFaq: "FAQ", navContact: "Contact",
@@ -476,46 +741,174 @@ const DICT = {
     cookieSettings: "Cookie settings",
     legalHeading: "Legal and data", legalSub: "Full texts. The contract and invoice are sent separately before work starts.",
     cookieText: "We use cookies so the site works properly and we can see visit statistics.", cookieAccept: "Accept", cookieEssential: "Only essential", cookieMore: "Details",
-    footNote: "Website redesign"
+    footNote: "Website redesign",
+    seoTitle: "Website redesign and mobile version — SLAPA",
+    seoDesc: "We rebuild old websites: fresh design, a properly designed mobile version, content migration and a domain change with redirects. Estimate after a short call — SLAPA agency.",
+    ogLocale: "en_US",
+    homeLabel: "to the top", navLabel: "Main navigation", langLabel: "Site language",
+    cookieTitle: "Cookie consent", caseLinkLabel: "Open the site"
   }
 };
 
 const CODES = ["ru", "uk", "hu", "en"];
+const LANG_NAMES = { ru: "Русский", uk: "Українська", hu: "Magyar", en: "English" };
+const SITE = "https://slapa.agency/";
+
+// The four languages share one URL and are picked client-side, so ?lang= is
+// what hreflang points at and what a shared link has to be able to restore.
+function urlLang() {
+  try {
+    const v = new URLSearchParams(window.location.search).get("lang");
+    return CODES.indexOf(v) > -1 ? v : null;
+  } catch (e) {
+    return null;
+  }
+}
 
 class Component extends DCLogic {
-  state = { lang: null, ba: 45, open: null, cookie: "pending", legal: null, doc: "privacy" };
+  state = { lang: urlLang(), open: null, cookie: "pending", legal: null, doc: "privacy" };
+
+  _ba = 45;      // current before/after split, in percent
+  _baStep = 0;   // index into the autoplay stop list
+  _auto = false;
+  _baVisible = false;
 
   componentDidMount() {
     import("./legal.js").then(m => this.setState({ legal: m.default })).catch(() => {});
-    this.mountCal();
-    // Animated by writing styles straight to the DOM — a per-frame setState
-    // would re-render the whole page and stutter.
-    const stops = [45, 22, 72, 4, 62, 30, 96, 40, 18, 78, 2, 55, 98, 35];
-    const edge = v => v < 8 || v > 92;
-    const ease = p => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-    let i = 0;
-    this._t0 = performance.now();
-    const loop = now => {
-      if (!this._auto) return;
-      const from = stops[i % stops.length];
-      const to = stops[(i + 1) % stops.length];
-      const span = edge(to) ? 2600 : 1800;
-      const hold = edge(to) ? 550 : 220;
-      const el = now - this._t0;
-      if (el > span + hold) { this._t0 = now; i++; }
-      else this.paintBa(from + (to - from) * ease(Math.min(1, el / span)));
-      this._raf = requestAnimationFrame(loop);
-    };
-    this._auto = true;
-    this._raf = requestAnimationFrame(loop);
+    this.applySeo();
+    this.syncSlotImages();
+    this.armCal();
+    this.armBa();
     let stored = null;
     try { stored = localStorage.getItem("slapa-cookie-consent"); } catch (e) {}
     this.setState({ cookie: stored || "pending" });
   }
 
+  componentDidUpdate() {
+    this.syncSlotImages();
+  }
+
+  // The raw <x-dc> template sits in the document until the runtime boots, and
+  // <image-slot> upgrades on it too — so a templated src="{{ c.img }}" made
+  // the element fetch that literal string and 404 before the real render. The
+  // per-card path rides on data-img and is copied onto src afterwards; values
+  // still holding a placeholder are skipped.
+  syncSlotImages() {
+    const nodes = document.querySelectorAll("image-slot[data-img]");
+    for (let i = 0; i < nodes.length; i++) {
+      const el = nodes[i];
+      const want = el.getAttribute("data-img");
+      if (!want || want.indexOf("{{") > -1) continue;
+      if (el.getAttribute("src") !== want) el.setAttribute("src", want);
+    }
+  }
+
   get lang() {
     const l = this.state.lang || this.props.lang || "ru";
     return DICT[l] ? l : "ru";
+  }
+
+  // One URL serves four languages, so <html lang>, the title, the description
+  // and the OG/canonical pair have to be re-pointed in the DOM on every
+  // switch — otherwise a shared link always previews in Russian and the page
+  // reports the wrong language to crawlers and screen readers.
+  applySeo(lang, pushUrl) {
+    lang = DICT[lang] ? lang : this.lang;
+    const t = DICT[lang];
+    const url = lang === "ru" ? SITE : SITE + "?lang=" + lang;
+    try {
+      const head = document.head;
+      const put = (sel, value) => {
+        const el = head.querySelector(sel);
+        if (el) el.setAttribute("content", value);
+      };
+      document.documentElement.lang = lang;
+      document.title = t.seoTitle;
+      put('meta[name="description"]', t.seoDesc);
+      put('meta[property="og:title"]', t.seoTitle);
+      put('meta[property="og:description"]', t.seoDesc);
+      put('meta[property="og:locale"]', t.ogLocale);
+      put('meta[property="og:url"]', url);
+      put('meta[name="twitter:title"]', t.seoTitle);
+      put('meta[name="twitter:description"]', t.seoDesc);
+      const canonical = head.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.setAttribute("href", url);
+      // Only rewrite the address bar on a deliberate switch, and only the
+      // lang key — campaign params on the incoming URL have to survive.
+      if (pushUrl && window.history && window.history.replaceState) {
+        const u = new URL(window.location.href);
+        if (lang === "ru") u.searchParams.delete("lang");
+        else u.searchParams.set("lang", lang);
+        window.history.replaceState(null, "", u.pathname + u.search + u.hash);
+      }
+    } catch (e) {}
+  }
+
+  // Cal.com's embed is a third-party script plus an iframe. Nothing above the
+  // contact block needs it, so it stays unrequested until that block is
+  // within a screen or so of the viewport.
+  armCal() {
+    const host = document.getElementById("slapa-cal");
+    if (!host || typeof IntersectionObserver !== "function") { this.mountCal(); return; }
+    this._calIo = new IntersectionObserver(entries => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      this._calIo.disconnect();
+      this._calIo = null;
+      this.mountCal();
+    }, { rootMargin: "500px 0px" });
+    this._calIo.observe(host);
+  }
+
+  // The before/after sweep used to run from mount until unload — a
+  // requestAnimationFrame writing clip-path every frame with the section far
+  // off screen, or the tab in the background. Now it only runs while the
+  // frame is on screen, and not at all when reduced motion is requested.
+  armBa() {
+    this.paintBa(this._ba);
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const frame = document.querySelector("[data-ba-frame]");
+    if (!frame || typeof IntersectionObserver !== "function") { this.startBa(); return; }
+    this._baIo = new IntersectionObserver(entries => {
+      this._baVisible = entries.some(e => e.isIntersecting);
+      if (this._baVisible && !document.hidden) this.startBa();
+      else this.stopBa();
+    }, { rootMargin: "120px 0px" });
+    this._baIo.observe(frame);
+    this._onVisibility = () => {
+      if (document.hidden) this.stopBa();
+      else if (this._baVisible) this.startBa();
+    };
+    document.addEventListener("visibilitychange", this._onVisibility);
+  }
+
+  // Animated by writing styles straight to the DOM — a per-frame setState
+  // would re-render the whole page and stutter.
+  startBa() {
+    if (this._auto) return;
+    this._auto = true;
+    const stops = [45, 22, 72, 4, 62, 30, 96, 40, 18, 78, 2, 55, 98, 35];
+    const edge = v => v < 8 || v > 92;
+    const ease = p => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+    this._t0 = performance.now();
+    const loop = now => {
+      if (!this._auto) return;
+      const from = stops[this._baStep % stops.length];
+      const to = stops[(this._baStep + 1) % stops.length];
+      const span = edge(to) ? 2600 : 1800;
+      const hold = edge(to) ? 550 : 220;
+      const el = now - this._t0;
+      if (el > span + hold) { this._t0 = now; this._baStep++; }
+      else this.paintBa(from + (to - from) * ease(Math.min(1, el / span)));
+      this._raf = requestAnimationFrame(loop);
+    };
+    this._raf = requestAnimationFrame(loop);
+  }
+
+  stopBa() {
+    if (!this._auto) return;
+    this._auto = false;
+    cancelAnimationFrame(this._raf);
   }
 
   // Official Cal.com inline embed — it injects its own iframe into #slapa-cal.
@@ -572,17 +965,27 @@ class Component extends DCLogic {
 
   paintBa(pct) {
     const v = Math.max(0, Math.min(100, pct));
+    this._ba = v;
     if (!this._clip) this._clip = document.querySelector("[data-ba-clip]");
     if (!this._line) this._line = document.querySelector("[data-ba-line]");
+    if (!this._handle) this._handle = document.querySelector("[data-ba-handle]");
     if (this._clip) this._clip.style.clipPath = "inset(0 " + (100 - v).toFixed(2) + "% 0 0)";
     if (this._line) this._line.style.left = v.toFixed(2) + "%";
+    if (this._handle) {
+      const now = String(Math.round(v));
+      this._handle.setAttribute("aria-valuenow", now);
+      this._handle.setAttribute("aria-valuetext", now + "%");
+    }
   }
 
   componentWillUnmount() {
     if (this._ro) this._ro.disconnect();
+    if (this._calIo) this._calIo.disconnect();
+    if (this._baIo) this._baIo.disconnect();
+    if (this._onVisibility) document.removeEventListener("visibilitychange", this._onVisibility);
+    if (this._dragRaf) cancelAnimationFrame(this._dragRaf);
     clearTimeout(this._reflow);
-    this._auto = false;
-    cancelAnimationFrame(this._raf);
+    this.stopBa();
   }
 
   setCookie(value) {
@@ -604,24 +1007,52 @@ class Component extends DCLogic {
       showMockup: this.props.showMockup !== false,
       langs: CODES.map(code => ({
         code: code === "uk" ? "UA" : code.toUpperCase(),
-        pick: () => this.setState({ lang: code }),
-        style: `padding: 6px 10px; border: 0; cursor: pointer; letter-spacing: 0.08em; border-radius: 999px; background: ${code === lang ? "#0A0A0A" : "transparent"}; color: ${code === lang ? "#F2EFEA" : "rgba(10,10,10,0.6)"}; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500`
+        label: LANG_NAMES[code],
+        lang: code,
+        active: code === lang ? "true" : "false",
+        pick: () => { this.setState({ lang: code }); this.applySeo(code, true); },
+        style: `padding: 6px 10px; border: 0; cursor: pointer; letter-spacing: 0.08em; border-radius: 999px; background: ${code === lang ? "#0A0A0A" : "transparent"}; color: ${code === lang ? "#F2EFEA" : "rgba(10,10,10,0.72)"}; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500`
       })),
       // cards 2 (migration/domain) and 3 (speed/fixes) are text-only
       services: t.services.map((s, i) => ({ num: "0" + (i + 1), title: s[0], text: s[1], slot: s[2], slotId: "slapa-service-" + i, hasImage: i < 2,
+        img: i < 2 ? "assets/img/service-" + i + ".webp" : "",
         cardStyle: "display: flex; flex-direction: column; gap: 22px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px; " + (i < 2 ? "padding: 16px 16px 30px" : "padding: 34px 30px 36px; justify-content: center") })),
-      cases: t.cases.map((c, i) => ({ name: c[0], text: c[1], tag: c[2], url: c[3].replace(/^https?:\/\//, ""), href: c[3], slot: t.caseSlot, slotId: "slapa-case-" + i })),
+      cases: t.cases.map((c, i) => ({ name: c[0], text: c[1], tag: c[2], url: c[3].replace(/^https?:\/\//, ""), href: c[3], slot: t.caseSlot, slotId: "slapa-case-" + i,
+        img: "assets/img/case-" + i + ".webp",
+        linkLabel: t.caseLinkLabel + " — " + c[0] })),
       faqs: t.faqs.map((f, i) => ({
         q: f[0], a: f[1],
-        open: openIdx === i,
+        btnId: "slapa-faq-q-" + i,
+        panelId: "slapa-faq-a-" + i,
+        expanded: openIdx === i ? "true" : "false",
         sign: openIdx === i ? "−" : "+",
+        panelStyle: openIdx === i ? "display: block" : "display: none",
         toggle: () => this.setState({ open: openIdx === i ? -1 : i })
       })),
 
+      // Keyboard equivalent of dragging the handle, so the comparison is
+      // reachable without a pointer.
+      baKey: e => {
+        const step = e.shiftKey ? 10 : 2;
+        let next = null;
+        if (e.key === "ArrowLeft" || e.key === "ArrowDown") next = this._ba - step;
+        else if (e.key === "ArrowRight" || e.key === "ArrowUp") next = this._ba + step;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = 100;
+        if (next === null) return;
+        e.preventDefault();
+        this.stopBa();
+        if (this._baIo) { this._baIo.disconnect(); this._baIo = null; }
+        this.paintBa(next);
+      },
+
       dragStart: e => {
         e.preventDefault();
-        this._auto = false;
-        cancelAnimationFrame(this._raf);
+        // A manual drag takes the slider over for good: stop the autoplay and
+        // drop the visibility observer that would otherwise restart it on the
+        // next scroll past the section.
+        this.stopBa();
+        if (this._baIo) { this._baIo.disconnect(); this._baIo = null; }
         const frame = e.currentTarget.closest("[data-ba-frame]");
         if (!frame) return;
         const rect = frame.getBoundingClientRect();
@@ -653,6 +1084,7 @@ class Component extends DCLogic {
       legalTabs: (legalPack ? legalPack.docs : []).map(d => ({
         title: d.title,
         count: String(d.sections.length).padStart(2, "0"),
+        selected: d.id === this.state.doc ? "true" : "false",
         pick: () => this.setState({ doc: d.id }),
         style: `display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 15px 18px; text-align: left; cursor: pointer; border-radius: 16px; font-family: inherit; font-size: 15px; font-weight: ${d.id === this.state.doc ? 700 : 500}; background: ${d.id === this.state.doc ? "#E9804A" : "transparent"}; color: ${d.id === this.state.doc ? "#0A0A0A" : "rgba(242,239,234,0.72)"}; border: 1px solid ${d.id === this.state.doc ? "#E9804A" : "rgba(242,239,234,0.12)"}`
       })),

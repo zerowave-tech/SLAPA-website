@@ -1,0 +1,11 @@
+# slapa.agency
+User-agent: *
+Allow: /
+
+# Editor scratch space and the <image-slot> persistence sidecar — never
+# content, and indexing them only wastes crawl budget.
+Disallow: /uploads/
+Disallow: /.image-slots.state.json
+Disallow: /.thumbnail
+
+Sitemap: https://slapa.agency/sitemap.xml
