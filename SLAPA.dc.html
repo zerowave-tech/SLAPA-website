@@ -44,21 +44,13 @@
      row of its own and the rest shrinks to meet it. */
   @media (max-width: 760px) {
     header { flex-wrap: wrap !important; gap: 10px !important; padding: 10px 12px !important; border-radius: 24px !important; }
-    header > a span { display: none; }
     header > div { gap: 8px !important; }
-    header > div > div button { padding: 5px 8px !important; }
+    /* The switcher reappears inside the burger panel. */
+    header > div > div:first-child { display: none !important; }
     header > div > a { padding: 10px 16px !important; font-size: 13px !important; }
-    header > nav {
-      order: 3;
-      flex: 1 0 100% !important;
-      flex-wrap: nowrap !important;
-      justify-content: space-between !important;
-      gap: 10px !important;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    header > nav::-webkit-scrollbar { display: none; }
-    header > nav a { font-size: 13px !important; }
+    header nav a { padding: 11px 12px; border-radius: 12px; }
+    header nav a:active { background: rgba(10,10,10,0.09); }
+    header nav button { padding: 6px 11px !important; }
 
     /* Collapse the multi-column grids. Matching on the inline style is the
        only handle available — the markup carries no classes — and the
@@ -78,13 +70,19 @@
     <img src="assets/slapa-mark-black.png" alt="SLAPA" style="display: block; height: 26px; width: auto" />
     <span style="font-size: 18px; font-weight: 800; letter-spacing: 0.16em">SLAPA</span>
   </a>
-  <nav style="display: flex; align-items: center; flex: 1 1 auto; min-width: 0; justify-content: center; flex-wrap: wrap; gap: 6px clamp(12px, 1.6vw, 26px); font-size: 14px; font-weight: 600">
+  <nav style="{{ navStyle }}">
     <a href="{{ hrefServices }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navServices }}</a>
     <a href="{{ hrefCases }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navCases }}</a>
     <a href="{{ hrefFaq }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navFaq }}</a>
     <a href="{{ hrefContact }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navContact }}</a>
     <a href="{{ hrefLegal }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.legalTitle }}</a>
+    <div style="{{ menuLangStyle }}">
+      <sc-for list="{{ langs }}" as="l" hint-placeholder-count="4">
+        <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}">{{ l.code }}</button>
+      </sc-for>
+    </div>
   </nav>
+  <button type="button" aria-label="Menu" onClick="{{ toggleMenu }}" style="{{ burgerStyle }}">{{ burgerIcon }}</button>
   <div style="display: flex; align-items: center; flex: 0 0 auto; gap: 10px">
     <div style="display: flex; gap: 2px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px">
       <sc-for list="{{ langs }}" as="l" hint-placeholder-count="4">
@@ -310,7 +308,7 @@
     <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.legalTitle }}</span>
       <sc-for list="{{ legalTabs }}" as="d" hint-placeholder-count="4">
-        <a href="#legal" onClick="{{ d.pick }}">{{ d.title }}</a>
+        <a href="{{ d.href }}">{{ d.title }}</a>
       </sc-for>
       <button type="button" onClick="{{ cookieReset }}" style="align-self: flex-start; padding: 0; background: none; border: 0; color: #E9804A; font-size: 15px; font-weight: 500; cursor: pointer; text-align: left" style-hover="opacity: 0.7">{{ t.cookieSettings }}</button>
     </div>
@@ -323,7 +321,7 @@
 
 <sc-if value="{{ showCookies }}" hint-placeholder-val="{{ false }}">
   <div style="position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 80; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; max-width: 1360px; margin: 0 auto; padding: 20px 24px; background: rgba(18,18,18,0.94); backdrop-filter: blur(14px); border: 1px solid rgba(242,239,234,0.14); border-radius: 24px">
-    <p style="margin: 0; max-width: 62ch; font-size: 14px; line-height: 1.5; color: rgba(242,239,234,0.72)">{{ t.cookieText }} <a href="#legal" onClick="{{ openCookieDoc }}" style="text-decoration: underline; text-underline-offset: 3px">{{ t.cookieMore }}</a></p>
+    <p style="margin: 0; max-width: 62ch; font-size: 14px; line-height: 1.5; color: rgba(242,239,234,0.72)">{{ t.cookieText }} <a href="{{ hrefCookies }}" style="text-decoration: underline; text-underline-offset: 3px">{{ t.cookieMore }}</a></p>
     <div style="display: flex; flex-wrap: wrap; gap: 10px">
       <button type="button" onClick="{{ cookieEssential }}" style="padding: 12px 20px; background: transparent; color: #F2EFEA; border: 1px solid rgba(242,239,234,0.2); border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap" style-hover="background: rgba(242,239,234,0.08)">{{ t.cookieEssential }}</button>
       <button type="button" onClick="{{ cookieAccept }}" style="padding: 12px 22px; background: #E9804A; color: #0A0A0A; border: 0; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap" style-hover="background: #F2EFEA">{{ t.cookieAccept }}</button>
@@ -537,10 +535,12 @@ const CODES = ["ru", "uk", "hu", "en"];
 // Ukrainian sits at /ua/ to match the sister site slapa.agency links to.
 const SLUG = { ru: "", uk: "ua", hu: "hu", en: "en" };
 const SECTIONS = ["services", "cases", "faq", "contact", "legal"];
+const DOCS = ["privacy", "cookies", "terms", "security"];
 const ORIGIN = "https://www.slapa.agency";
 
-function pathFor(lang, section) {
-  const parts = [SLUG[lang] || "", section || ""].filter(Boolean);
+function pathFor(lang, section, doc) {
+  const leaf = section === "legal" && doc ? doc : "";
+  const parts = [SLUG[lang] || "", section || "", leaf].filter(Boolean);
   return "/" + parts.join("/");
 }
 
@@ -550,14 +550,20 @@ function parsePath(pathname) {
   const hit = CODES.filter(c => SLUG[c]).find(c => SLUG[c] === parts[0]);
   if (hit) { lang = hit; parts.shift(); }
   const section = SECTIONS.indexOf(parts[0]) !== -1 ? parts[0] : null;
-  return { lang: lang, section: section };
+  const doc = section === "legal" && DOCS.indexOf(parts[1]) !== -1 ? parts[1] : null;
+  return { lang: lang, section: section, doc: doc };
 }
 
 // Titles and descriptions come straight out of DICT so the pre-rendered
 // <head> can never drift from the copy actually shown on the page.
-function META(lang, section) {
+function META(lang, section, doc, legal) {
   const t = DICT[lang] || DICT.ru;
   const brand = "SLAPA";
+  if (section === "legal" && doc) {
+    const pack = legal ? legal[lang] || legal.en : null;
+    const hit = pack ? pack.docs.filter(d => d.id === doc)[0] : null;
+    if (hit) return { title: hit.title + " — " + brand, description: hit.lede };
+  }
   if (!section) return { title: t.h1 + " — " + brand, description: t.heroSub };
   const map = {
     services: [t.servicesTitle, t.servicesSub],
@@ -572,7 +578,7 @@ function META(lang, section) {
 /* ROUTE-META-END */
 
 class Component extends DCLogic {
-  state = { lang: null, ba: 45, open: null, cookie: "pending", legal: null, doc: "privacy" };
+  state = { lang: null, ba: 45, open: null, cookie: "pending", legal: null, doc: "privacy", menu: false, narrow: false };
 
   componentDidMount() {
     // One delegated listener beats an onClick on every nav anchor: the
@@ -588,16 +594,36 @@ class Component extends DCLogic {
       try { url = new URL(raw, location.href); } catch (err) { return; }
       if (url.origin !== location.origin) return;
       const r = parsePath(url.pathname);
-      if (pathFor(r.lang, r.section) !== url.pathname.replace(/\/$/, "") && url.pathname !== "/") return;
+      if (pathFor(r.lang, r.section, r.doc) !== url.pathname.replace(/\/$/, "") && url.pathname !== "/") return;
       e.preventDefault();
-      this.navigate(r.lang, r.section);
+      this.navigate(r.lang, r.section, r.doc);
     };
     document.addEventListener("click", this._onNav);
 
+    // Anything outside the header dismisses an open menu.
+    this._onOutside = e => {
+      if (!this.state.menu) return;
+      const head = e.target && e.target.closest ? e.target.closest("header") : null;
+      if (!head) this.setState({ menu: false });
+    };
+    document.addEventListener("click", this._onOutside);
+
+    this._onKey = e => { if (e.key === "Escape" && this.state.menu) this.setState({ menu: false }); };
+    document.addEventListener("keydown", this._onKey);
+
+    // The burger only exists below this width; widening the window must not
+    // leave the panel stranded open.
+    this._mq = window.matchMedia("(max-width: 760px)");
+    this._onMq = e => this.setState({ narrow: e.matches, menu: e.matches && this.state.menu });
+    this._mq.addEventListener("change", this._onMq);
+    this.setState({ narrow: this._mq.matches });
+
+    if (this.route.doc) this.setState({ doc: this.route.doc });
+
     this._onPop = () => {
       const r = parsePath(location.pathname);
-      this.setState({ lang: r.lang });
-      this.applyRoute(r.lang, r.section, "instant");
+      this.setState(r.doc ? { lang: r.lang, doc: r.doc, menu: false } : { lang: r.lang, menu: false });
+      this.applyRoute(r.lang, r.section, r.doc, "instant");
     };
     window.addEventListener("popstate", this._onPop);
 
@@ -640,25 +666,39 @@ class Component extends DCLogic {
   // images land later and push the target down. Re-aim until it stops moving,
   // and back off the instant the visitor scrolls for themselves.
   deepLink(section) {
-    let last = -1, tries = 0;
+    const started = Date.now();
+    let done = false;
     const stop = () => {
+      if (done) return;
+      done = true;
       clearTimeout(this._deep);
+      if (this._settle) { this._settle.disconnect(); this._settle = null; }
       window.removeEventListener("wheel", stop);
       window.removeEventListener("touchstart", stop);
       window.removeEventListener("keydown", stop);
+      window.removeEventListener("load", aim);
     };
-    const step = () => {
+    const aim = () => {
+      if (done) return;
       const el = document.getElementById(section);
-      if (!el) { this._deep = setTimeout(step, 120); return; }
-      const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 96);
-      window.scrollTo({ top: y, behavior: "instant" });
-      if (Math.abs(y - last) > 2 && ++tries < 12) { last = y; this._deep = setTimeout(step, 120); }
-      else stop();
+      if (el) this.scrollToSection(section, "instant");
+      // Webfonts settle fast; the booking iframe reports its height much
+      // later, so keep re-aiming for a few seconds rather than a few frames.
+      if (Date.now() - started > 6000) stop();
     };
     window.addEventListener("wheel", stop, { passive: true });
     window.addEventListener("touchstart", stop, { passive: true });
     window.addEventListener("keydown", stop);
-    step();
+    window.addEventListener("load", aim);
+    if (typeof ResizeObserver !== "undefined") {
+      this._settle = new ResizeObserver(aim);
+      this._settle.observe(document.body);
+    }
+    const tick = () => {
+      aim();
+      if (!done) this._deep = setTimeout(tick, 150);
+    };
+    tick();
   }
 
   scrollToSection(section, behavior) {
@@ -669,21 +709,24 @@ class Component extends DCLogic {
     window.scrollTo({ top: Math.max(0, top), behavior: behavior });
   }
 
-  applyRoute(lang, section, behavior) {
-    const meta = META(lang, section);
+  applyRoute(lang, section, doc, behavior) {
+    const meta = META(lang, section, doc, this.state.legal);
     document.title = meta.title;
     document.documentElement.lang = lang;
     const d = document.querySelector('meta[name="description"]');
     if (d) d.setAttribute("content", meta.description);
     const c = document.querySelector('link[rel="canonical"]');
-    if (c) c.setAttribute("href", ORIGIN + pathFor(lang, section));
+    if (c) c.setAttribute("href", ORIGIN + pathFor(lang, section, doc));
     this.scrollToSection(section, behavior);
   }
 
-  navigate(lang, section) {
-    history.pushState(null, "", pathFor(lang, section));
-    if (lang !== this.lang) this.setState({ lang: lang });
-    this.applyRoute(lang, section, "smooth");
+  navigate(lang, section, doc) {
+    history.pushState(null, "", pathFor(lang, section, doc));
+    const next = { menu: false };
+    if (lang !== this.lang) next.lang = lang;
+    if (doc) next.doc = doc;
+    this.setState(next);
+    this.applyRoute(lang, section, doc, "smooth");
   }
 
   get lang() {
@@ -753,7 +796,11 @@ class Component extends DCLogic {
 
   componentWillUnmount() {
     clearTimeout(this._deep);
+    if (this._settle) this._settle.disconnect();
     document.removeEventListener("click", this._onNav);
+    document.removeEventListener("click", this._onOutside);
+    document.removeEventListener("keydown", this._onKey);
+    if (this._mq) this._mq.removeEventListener("change", this._onMq);
     window.removeEventListener("popstate", this._onPop);
     if (this._ro) this._ro.disconnect();
     clearTimeout(this._reflow);
@@ -776,12 +823,27 @@ class Component extends DCLogic {
 
     return {
       t,
+      menuOpen: this.state.menu,
+      burgerIcon: this.state.menu ? "\u2715" : "\u2630",
+      burgerStyle: this.state.narrow
+        ? "display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 999px; background: rgba(10,10,10,0.1); color: #0A0A0A; font-size: 17px; line-height: 1; cursor: pointer"
+        : "display: none",
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      navStyle: !this.state.narrow
+        ? "display: flex; align-items: center; flex: 1 1 auto; min-width: 0; justify-content: center; flex-wrap: wrap; gap: 6px clamp(12px, 1.6vw, 26px); font-size: 14px; font-weight: 600"
+        : this.state.menu
+          ? "position: absolute; top: calc(100% + 10px); left: 0; right: 0; z-index: 70; display: flex; flex-direction: column; align-items: stretch; gap: 2px; padding: 12px; background: #E9804A; border: 1px solid rgba(10,10,10,0.12); border-radius: 24px; box-shadow: 0 20px 44px rgba(0,0,0,0.38); font-size: 16px; font-weight: 700"
+          : "display: none",
+      menuLangStyle: this.state.narrow
+        ? "display: flex; gap: 2px; margin-top: 8px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px; align-self: flex-start"
+        : "display: none",
       hrefHome: pathFor(lang, null),
       hrefServices: pathFor(lang, "services"),
       hrefCases: pathFor(lang, "cases"),
       hrefFaq: pathFor(lang, "faq"),
       hrefContact: pathFor(lang, "contact"),
       hrefLegal: pathFor(lang, "legal"),
+      hrefCookies: pathFor(lang, "legal", "cookies"),
       showMarquee: this.props.showMarquee !== false,
       showMockup: this.props.showMockup !== false,
       langs: CODES.map(code => ({
@@ -834,8 +896,9 @@ class Component extends DCLogic {
       legalController: legalPack ? legalPack.controller : "",
       legalTabs: (legalPack ? legalPack.docs : []).map(d => ({
         title: d.title,
+        href: pathFor(lang, "legal", d.id),
         count: String(d.sections.length).padStart(2, "0"),
-        pick: () => this.setState({ doc: d.id }),
+        pick: () => this.navigate(this.lang, "legal", d.id),
         style: `display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 15px 18px; text-align: left; cursor: pointer; border-radius: 16px; font-family: inherit; font-size: 15px; font-weight: ${d.id === this.state.doc ? 700 : 500}; background: ${d.id === this.state.doc ? "#E9804A" : "transparent"}; color: ${d.id === this.state.doc ? "#0A0A0A" : "rgba(242,239,234,0.72)"}; border: 1px solid ${d.id === this.state.doc ? "#E9804A" : "rgba(242,239,234,0.12)"}`
       })),
       legalDocTitle: activeDoc ? activeDoc.title : "",
@@ -843,7 +906,7 @@ class Component extends DCLogic {
       legalSections: activeDoc
         ? activeDoc.sections.map((s, i) => ({ num: String(i + 1).padStart(2, "0"), h: s[0], p: s[1] }))
         : [],
-      openCookieDoc: () => this.setState({ doc: "cookies" }),
+      openCookieDoc: () => this.navigate(this.lang, "legal", "cookies"),
       openPrivacyDoc: () => this.setState({ doc: "privacy" })
     };
   }

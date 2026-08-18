@@ -12,7 +12,7 @@
 import { readFile, writeFile, mkdir, rm, cp } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = path.join(ROOT, "SLAPA.dc.html");
@@ -29,9 +29,14 @@ const from = html.indexOf(START);
 const to = html.indexOf(END);
 if (from < 0 || to < 0) throw new Error("ROUTE-META markers missing from SLAPA.dc.html");
 
-const { DICT, CODES, SECTIONS, ORIGIN, pathFor, META } = new Function(
-  html.slice(from, to) + "\nreturn { DICT, CODES, SECTIONS, ORIGIN, pathFor, META };"
+const { DICT, CODES, SECTIONS, DOCS, ORIGIN, pathFor, META } = new Function(
+  html.slice(from, to) + "\nreturn { DICT, CODES, SECTIONS, DOCS, ORIGIN, pathFor, META };"
 )();
+
+// The legal documents carry their own titles, and the page only fetches them
+// lazily — importing the module here is what lets /legal/privacy ship a real
+// <title> instead of the generic section one.
+const legal = (await import(pathToFileURL(path.join(ROOT, "legal.js")).href)).default;
 
 const LOCALE = { ru: "ru_RU", uk: "uk_UA", hu: "hu_HU", en: "en_US" };
 const OG_IMAGE = ORIGIN + "/assets/og-cover.png";
@@ -60,21 +65,24 @@ const BODY = absolutize(html.slice(runtimeAt));
 
 const routes = [];
 for (const lang of CODES) {
-  for (const section of [null, ...SECTIONS]) routes.push({ lang, section });
+  for (const section of [null, ...SECTIONS]) routes.push({ lang, section, doc: null });
+  for (const doc of DOCS) routes.push({ lang, section: "legal", doc });
 }
 
-function headFor(lang, section) {
-  const { title, description } = META(lang, section);
-  const url = ORIGIN + pathFor(lang, section);
+function headFor(lang, section, doc) {
+  const { title, description } = META(lang, section, doc, legal);
+  const url = ORIGIN + pathFor(lang, section, doc);
   const alternates = CODES
-    .map(c => `<link rel="alternate" hreflang="${c}" href="${ORIGIN + pathFor(c, section)}" />`)
-    .concat(`<link rel="alternate" hreflang="x-default" href="${ORIGIN + pathFor(DEFAULT_LANG, section)}" />`)
+    .map(c => `<link rel="alternate" hreflang="${c}" href="${ORIGIN + pathFor(c, section, doc)}" />`)
+    .concat(`<link rel="alternate" hreflang="x-default" href="${ORIGIN + pathFor(DEFAULT_LANG, section, doc)}" />`)
     .join("\n");
 
   return `<title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}" />
 <link rel="canonical" href="${url}" />
 ${alternates}
+<link rel="icon" type="image/png" href="/assets/favicon.png" />
+<link rel="apple-touch-icon" href="/assets/favicon.png" />
 <meta name="theme-color" content="#0A0A0A" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="SLAPA" />
@@ -90,20 +98,20 @@ ${alternates}
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:description" content="${esc(description)}" />
 <meta name="twitter:image" content="${OG_IMAGE}" />
-<script>window.__SLAPA_ROUTE__=${JSON.stringify({ lang, section })}</script>`;
+<script>window.__SLAPA_ROUTE__=${JSON.stringify({ lang, section, doc })}</script>`;
 }
 
 function sitemap() {
-  const urls = routes.map(({ lang, section }) => {
+  const urls = routes.map(({ lang, section, doc }) => {
     const alts = CODES
-      .map(c => `    <xhtml:link rel="alternate" hreflang="${c}" href="${ORIGIN + pathFor(c, section)}" />`)
-      .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN + pathFor(DEFAULT_LANG, section)}" />`)
+      .map(c => `    <xhtml:link rel="alternate" hreflang="${c}" href="${ORIGIN + pathFor(c, section, doc)}" />`)
+      .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN + pathFor(DEFAULT_LANG, section, doc)}" />`)
       .join("\n");
     return `  <url>
-    <loc>${ORIGIN + pathFor(lang, section)}</loc>
+    <loc>${ORIGIN + pathFor(lang, section, doc)}</loc>
 ${alts}
     <changefreq>monthly</changefreq>
-    <priority>${section ? "0.8" : "1.0"}</priority>
+    <priority>${doc ? "0.6" : section ? "0.8" : "1.0"}</priority>
   </url>`;
   }).join("\n");
 
@@ -118,10 +126,10 @@ ${urls}
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 
-for (const { lang, section } of routes) {
+for (const { lang, section, doc } of routes) {
   const page = HEAD_OPEN.replace('<html lang="ru">', `<html lang="${lang}">`)
-    + headFor(lang, section) + "\n" + BODY;
-  const dir = path.join(OUT, pathFor(lang, section));
+    + headFor(lang, section, doc) + "\n" + BODY;
+  const dir = path.join(OUT, pathFor(lang, section, doc));
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, "index.html"), page, "utf8");
 }
@@ -150,4 +158,6 @@ await writeFile(path.join(OUT, "image-slot.js"), pinned, "utf8");
 await writeFile(path.join(OUT, "sitemap.xml"), sitemap(), "utf8");
 
 console.log(`built ${routes.length} routes into dist/`);
-for (const { lang, section } of routes) console.log(`  ${pathFor(lang, section).padEnd(16)} ${META(lang, section).title}`);
+for (const { lang, section, doc } of routes) {
+  console.log(`  ${pathFor(lang, section, doc).padEnd(22)} ${META(lang, section, doc, legal).title}`);
+}
