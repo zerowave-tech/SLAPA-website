@@ -38,6 +38,36 @@
   ::selection { background: #E9804A; color: #0A0A0A; }
   input, textarea, button { font-family: inherit; }
   @keyframes slapa-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* The header pill packs logo, five nav links, a language switch and a CTA
+     into one row. Below this width they no longer fit, so the nav drops to a
+     row of its own and the rest shrinks to meet it. */
+  @media (max-width: 760px) {
+    header { flex-wrap: wrap !important; gap: 10px !important; padding: 10px 12px !important; border-radius: 24px !important; }
+    header > a span { display: none; }
+    header > div { gap: 8px !important; }
+    header > div > div button { padding: 5px 8px !important; }
+    header > div > a { padding: 10px 16px !important; font-size: 13px !important; }
+    header > nav {
+      order: 3;
+      flex: 1 0 100% !important;
+      flex-wrap: nowrap !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    header > nav::-webkit-scrollbar { display: none; }
+    header > nav a { font-size: 13px !important; }
+
+    /* Collapse the multi-column grids. Matching on the inline style is the
+       only handle available — the markup carries no classes — and the
+       "26px 1fr" numbered rows are deliberately not in this list. */
+    [style*="repeat(2, 1fr)"],
+    [style*="0.85fr 1.15fr"],
+    [style*="0.68fr 1.32fr"],
+    [style*="1.4fr 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
@@ -65,7 +95,7 @@
   </div>
 </header>
 
-<section id="top" style="position: relative; max-width: 1360px; margin: 0 auto; padding: 108px 0 0; overflow: hidden">
+<section id="top" style="position: relative; max-width: 1360px; margin: 0 auto; padding: clamp(56px, 10vw, 108px) 0 0; overflow: hidden">
   <div style="position: absolute; top: -220px; left: 50%; transform: translateX(-50%); width: 900px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.34), rgba(232,129,75,0)); pointer-events: none"></div>
   <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px">
     <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border: 1px solid rgba(242,239,234,0.14); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.72); white-space: nowrap">
@@ -95,7 +125,7 @@
   </sc-if>
 </section>
 
-<section id="services" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section id="services" style="max-width: 1360px; margin: 0 auto; padding: clamp(64px, 12vw, 130px) 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">01 — {{ t.navServices }}</span>
     <h2 style="margin: 0; max-width: 22ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.servicesTitle }}</h2>
@@ -121,7 +151,7 @@
   </div>
 </section>
 
-<section style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section style="max-width: 1360px; margin: 0 auto; padding: clamp(64px, 12vw, 130px) 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">02 — {{ t.baTitle }}</span>
     <h2 style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.baHeading }}</h2>
@@ -144,7 +174,7 @@
   </div>
 </section>
 
-<section id="cases" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section id="cases" style="max-width: 1360px; margin: 0 auto; padding: clamp(64px, 12vw, 130px) 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">03 — {{ t.navCases }}</span>
     <h2 style="margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.casesTitle }}</h2>
@@ -169,8 +199,8 @@
   </div>
 </section>
 
-<section id="faq" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
-  <div style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 60px; align-items: start">
+<section id="faq" style="max-width: 1360px; margin: 0 auto; padding: clamp(64px, 12vw, 130px) 0 0">
+  <div style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px, 5vw, 60px); align-items: start">
     <div style="display: flex; flex-direction: column; gap: 18px; position: sticky; top: 110px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">04 — FAQ</span>
       <h2 style="margin: 0; font-size: clamp(32px, 4.2vw, 58px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02">{{ t.faqTitle }}</h2>
@@ -192,7 +222,7 @@
   </div>
 </section>
 
-<section id="contact" style="position: relative; max-width: 1360px; margin: 130px auto 0; padding: 64px 56px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 34px; overflow: hidden">
+<section id="contact" style="position: relative; max-width: 1360px; margin: clamp(64px, 12vw, 130px) auto 0; padding: clamp(32px, 6vw, 64px) clamp(20px, 5vw, 56px); background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 34px; overflow: hidden">
   <div style="position: absolute; bottom: -260px; left: -120px; width: 700px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.3), rgba(232,129,75,0)); pointer-events: none"></div>
   <div style="position: relative; display: flex; flex-direction: column; gap: 40px">
     <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 32px">
@@ -220,13 +250,13 @@
   </div>
 </section>
 
-<section id="legal" style="max-width: 1360px; margin: 0 auto; padding: 130px 0 0">
+<section id="legal" style="max-width: 1360px; margin: 0 auto; padding: clamp(64px, 12vw, 130px) 0 0">
   <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px">
     <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A">06 — {{ t.legalTitle }}</span>
     <h2 style="margin: 0; max-width: 20ch; font-size: clamp(30px, 3.8vw, 52px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04">{{ t.legalHeading }}</h2>
     <p style="margin: 0; max-width: 52ch; font-size: 16px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty">{{ t.legalSub }}</p>
   </div>
-  <div style="display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 40px; align-items: start">
+  <div style="display: grid; grid-template-columns: 0.68fr 1.32fr; gap: clamp(24px, 4vw, 40px); align-items: start">
     <div style="position: sticky; top: 110px; display: flex; flex-direction: column; gap: 8px">
       <sc-for list="{{ legalTabs }}" as="d" hint-placeholder-count="4">
         <button type="button" onClick="{{ d.pick }}" style="{{ d.style }}">
@@ -236,7 +266,7 @@
       </sc-for>
       <p style="margin: 14px 4px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; letter-spacing: 0.06em; color: rgba(242,239,234,0.4)">{{ legalUpdated }}<br />{{ legalController }}</p>
     </div>
-    <article style="padding: 42px 46px 48px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px">
+    <article style="padding: clamp(26px, 5vw, 42px) clamp(22px, 4.5vw, 46px) clamp(28px, 5vw, 48px); background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px">
       <h3 style="margin: 0 0 14px; font-size: clamp(26px, 2.6vw, 36px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08">{{ legalDocTitle }}</h3>
       <p style="margin: 0 0 34px; padding-bottom: 30px; border-bottom: 1px solid rgba(242,239,234,0.1); font-size: 17px; line-height: 1.55; color: rgba(242,239,234,0.66); max-width: 66ch; text-wrap: pretty">{{ legalDocLede }}</p>
       <div style="display: flex; flex-direction: column; gap: 30px">
@@ -255,7 +285,7 @@
 </section>
 
 <footer style="max-width: 1360px; margin: 0 auto; padding: 90px 0 28px">
-  <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 44px; border-bottom: 1px solid rgba(242,239,234,0.1)">
+  <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: clamp(24px, 4vw, 48px); padding-bottom: 44px; border-bottom: 1px solid rgba(242,239,234,0.1)">
     <div style="display: flex; flex-direction: column; gap: 14px">
       <div style="display: flex; align-items: center; gap: 11px">
         <img src="assets/slapa-mark-orange.png" alt="SLAPA" style="display: block; height: 26px; width: auto" />
