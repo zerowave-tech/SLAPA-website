@@ -1,0 +1,8 @@
+{
+  "name": "slapa-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-routes.mjs"
+  }
+}

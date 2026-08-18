@@ -44,16 +44,16 @@
 <div style="max-width: 100%; overflow-x: hidden; padding: 0 20px 20px">
 
 <header style="position: sticky; top: 16px; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: clamp(10px, 1.4vw, 20px); margin: 16px auto 0; max-width: 1360px; padding: 12px 14px 12px 20px; background: #E9804A; border: 1px solid rgba(10,10,10,0.12); border-radius: 999px; color: #0A0A0A">
-  <a href="#top" style="display: flex; align-items: center; gap: 11px; flex: 0 0 auto; color: #0A0A0A" style-hover="opacity: 0.75; color: #0A0A0A">
+  <a href="{{ hrefHome }}" style="display: flex; align-items: center; gap: 11px; flex: 0 0 auto; color: #0A0A0A" style-hover="opacity: 0.75; color: #0A0A0A">
     <img src="assets/slapa-mark-black.png" alt="SLAPA" style="display: block; height: 26px; width: auto" />
     <span style="font-size: 18px; font-weight: 800; letter-spacing: 0.16em">SLAPA</span>
   </a>
   <nav style="display: flex; align-items: center; flex: 1 1 auto; min-width: 0; justify-content: center; flex-wrap: wrap; gap: 6px clamp(12px, 1.6vw, 26px); font-size: 14px; font-weight: 600">
-    <a href="#services" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navServices }}</a>
-    <a href="#cases" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navCases }}</a>
-    <a href="#faq" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navFaq }}</a>
-    <a href="#contact" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navContact }}</a>
-    <a href="#legal" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.legalTitle }}</a>
+    <a href="{{ hrefServices }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navServices }}</a>
+    <a href="{{ hrefCases }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navCases }}</a>
+    <a href="{{ hrefFaq }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navFaq }}</a>
+    <a href="{{ hrefContact }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.navContact }}</a>
+    <a href="{{ hrefLegal }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.legalTitle }}</a>
   </nav>
   <div style="display: flex; align-items: center; flex: 0 0 auto; gap: 10px">
     <div style="display: flex; gap: 2px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px">
@@ -61,7 +61,7 @@
         <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}">{{ l.code }}</button>
       </sc-for>
     </div>
-    <a href="#contact" style="padding: 12px 22px; background: #0A0A0A; color: #F2EFEA; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA; color: #0A0A0A">{{ t.callCta }}</a>
+    <a href="{{ hrefContact }}" style="padding: 12px 22px; background: #0A0A0A; color: #F2EFEA; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA; color: #0A0A0A">{{ t.callCta }}</a>
   </div>
 </header>
 
@@ -74,8 +74,8 @@
     <h1 style="margin: 0; max-width: 16ch; font-size: clamp(46px, 7.4vw, 116px); line-height: 1; font-weight: 900; letter-spacing: -0.04em; text-wrap: balance">{{ t.h1 }}</h1>
     <p style="margin: 0; max-width: 58ch; font-size: 19px; line-height: 1.5; color: rgba(242,239,234,0.66); text-wrap: pretty">{{ t.heroSub }}</p>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px">
-      <a href="#contact" style="padding: 17px 30px; background: #E9804A; color: #0A0A0A; border-radius: 999px; font-size: 15px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA">{{ t.callCta }}</a>
-      <a href="#cases" style="padding: 17px 30px; border: 1px solid rgba(242,239,234,0.18); border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap" style-hover="background: rgba(242,239,234,0.08); color: #F2EFEA">{{ t.navCases }} →</a>
+      <a href="{{ hrefContact }}" style="padding: 17px 30px; background: #E9804A; color: #0A0A0A; border-radius: 999px; font-size: 15px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA">{{ t.callCta }}</a>
+      <a href="{{ hrefCases }}" style="padding: 17px 30px; border: 1px solid rgba(242,239,234,0.18); border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap" style-hover="background: rgba(242,239,234,0.08); color: #F2EFEA">{{ t.navCases }} →</a>
     </div>
   </div>
   <sc-if value="{{ showMockup }}" hint-placeholder-val="{{ true }}">
@@ -265,11 +265,11 @@
     </div>
     <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.footNav }}</span>
-      <a href="#services">{{ t.navServices }}</a>
-      <a href="#cases">{{ t.navCases }}</a>
-      <a href="#faq">{{ t.navFaq }}</a>
-      <a href="#contact">{{ t.navContact }}</a>
-      <a href="#legal">{{ t.legalTitle }}</a>
+      <a href="{{ hrefServices }}">{{ t.navServices }}</a>
+      <a href="{{ hrefCases }}">{{ t.navCases }}</a>
+      <a href="{{ hrefFaq }}">{{ t.navFaq }}</a>
+      <a href="{{ hrefContact }}">{{ t.navContact }}</a>
+      <a href="{{ hrefLegal }}">{{ t.legalTitle }}</a>
     </div>
     <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)">{{ t.footContacts }}</span>
@@ -303,6 +303,8 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ru&quot;,&quot;uk&quot;,&quot;hu&quot;,&quot;en&quot;],&quot;default&quot;:&quot;ru&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;calLink&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://cal.com/slapa.agency/20min&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showMockup&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;faqStartOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+/* ROUTE-META-START — this block is read verbatim by scripts/build-routes.mjs.
+   Keep the markers and keep the block free of browser globals. */
 const DICT = {
   ru: {
     navServices: "Услуги", navCases: "Кейсы", navFaq: "FAQ", navContact: "Контакты",
@@ -500,10 +502,77 @@ const DICT = {
 
 const CODES = ["ru", "uk", "hu", "en"];
 
+// Every language/section pair is a real URL, pre-rendered by
+// scripts/build-routes.mjs. "ru" is the default and carries no prefix;
+// Ukrainian sits at /ua/ to match the sister site slapa.agency links to.
+const SLUG = { ru: "", uk: "ua", hu: "hu", en: "en" };
+const SECTIONS = ["services", "cases", "faq", "contact", "legal"];
+const ORIGIN = "https://www.slapa.agency";
+
+function pathFor(lang, section) {
+  const parts = [SLUG[lang] || "", section || ""].filter(Boolean);
+  return "/" + parts.join("/");
+}
+
+function parsePath(pathname) {
+  const parts = String(pathname || "/").split("/").filter(Boolean);
+  let lang = "ru";
+  const hit = CODES.filter(c => SLUG[c]).find(c => SLUG[c] === parts[0]);
+  if (hit) { lang = hit; parts.shift(); }
+  const section = SECTIONS.indexOf(parts[0]) !== -1 ? parts[0] : null;
+  return { lang: lang, section: section };
+}
+
+// Titles and descriptions come straight out of DICT so the pre-rendered
+// <head> can never drift from the copy actually shown on the page.
+function META(lang, section) {
+  const t = DICT[lang] || DICT.ru;
+  const brand = "SLAPA";
+  if (!section) return { title: t.h1 + " — " + brand, description: t.heroSub };
+  const map = {
+    services: [t.servicesTitle, t.servicesSub],
+    cases: [t.casesTitle, t.casesSub],
+    faq: [t.faqTitle, t.faqSub],
+    contact: [t.navContact, t.callSub],
+    legal: [t.legalTitle, t.legalHeading]
+  };
+  const m = map[section] || [];
+  return { title: (m[0] || t.h1) + " — " + brand, description: m[1] || t.heroSub };
+}
+/* ROUTE-META-END */
+
 class Component extends DCLogic {
   state = { lang: null, ba: 45, open: null, cookie: "pending", legal: null, doc: "privacy" };
 
   componentDidMount() {
+    // One delegated listener beats an onClick on every nav anchor: the
+    // markup keeps real hrefs, so links stay crawlable and middle-clickable.
+    this._onNav = e => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a) return;
+      const raw = a.getAttribute("href");
+      // "#legal" anchors drive the legal-document tabs — leave them alone.
+      if (!raw || raw.charAt(0) === "#" || a.target === "_blank") return;
+      let url;
+      try { url = new URL(raw, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin) return;
+      const r = parsePath(url.pathname);
+      if (pathFor(r.lang, r.section) !== url.pathname.replace(/\/$/, "") && url.pathname !== "/") return;
+      e.preventDefault();
+      this.navigate(r.lang, r.section);
+    };
+    document.addEventListener("click", this._onNav);
+
+    this._onPop = () => {
+      const r = parsePath(location.pathname);
+      this.setState({ lang: r.lang });
+      this.applyRoute(r.lang, r.section, "instant");
+    };
+    window.addEventListener("popstate", this._onPop);
+
+    if (this.route.section) this.deepLink(this.route.section);
+
     import("./legal.js").then(m => this.setState({ legal: m.default })).catch(() => {});
     this.mountCal();
     // Animated by writing styles straight to the DOM — a per-frame setState
@@ -531,8 +600,64 @@ class Component extends DCLogic {
     this.setState({ cookie: stored || "pending" });
   }
 
+  // Absent on the hand-edited source and inside the visual editor, so both
+  // keep falling back to the props default.
+  get route() {
+    return (typeof window !== "undefined" && window.__SLAPA_ROUTE__) || {};
+  }
+
+  // A single scroll on mount lands in the wrong place: webfonts and the slot
+  // images land later and push the target down. Re-aim until it stops moving,
+  // and back off the instant the visitor scrolls for themselves.
+  deepLink(section) {
+    let last = -1, tries = 0;
+    const stop = () => {
+      clearTimeout(this._deep);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    };
+    const step = () => {
+      const el = document.getElementById(section);
+      if (!el) { this._deep = setTimeout(step, 120); return; }
+      const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 96);
+      window.scrollTo({ top: y, behavior: "instant" });
+      if (Math.abs(y - last) > 2 && ++tries < 12) { last = y; this._deep = setTimeout(step, 120); }
+      else stop();
+    };
+    window.addEventListener("wheel", stop, { passive: true });
+    window.addEventListener("touchstart", stop, { passive: true });
+    window.addEventListener("keydown", stop);
+    step();
+  }
+
+  scrollToSection(section, behavior) {
+    const el = section ? document.getElementById(section) : null;
+    if (!el) { window.scrollTo({ top: 0, behavior: behavior }); return; }
+    // The header is sticky, so land above the heading rather than under it.
+    const top = el.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(0, top), behavior: behavior });
+  }
+
+  applyRoute(lang, section, behavior) {
+    const meta = META(lang, section);
+    document.title = meta.title;
+    document.documentElement.lang = lang;
+    const d = document.querySelector('meta[name="description"]');
+    if (d) d.setAttribute("content", meta.description);
+    const c = document.querySelector('link[rel="canonical"]');
+    if (c) c.setAttribute("href", ORIGIN + pathFor(lang, section));
+    this.scrollToSection(section, behavior);
+  }
+
+  navigate(lang, section) {
+    history.pushState(null, "", pathFor(lang, section));
+    if (lang !== this.lang) this.setState({ lang: lang });
+    this.applyRoute(lang, section, "smooth");
+  }
+
   get lang() {
-    const l = this.state.lang || this.props.lang || "ru";
+    const l = this.state.lang || this.route.lang || this.props.lang || "ru";
     return DICT[l] ? l : "ru";
   }
 
@@ -597,6 +722,9 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    clearTimeout(this._deep);
+    document.removeEventListener("click", this._onNav);
+    window.removeEventListener("popstate", this._onPop);
     if (this._ro) this._ro.disconnect();
     clearTimeout(this._reflow);
     this._auto = false;
@@ -618,11 +746,17 @@ class Component extends DCLogic {
 
     return {
       t,
+      hrefHome: pathFor(lang, null),
+      hrefServices: pathFor(lang, "services"),
+      hrefCases: pathFor(lang, "cases"),
+      hrefFaq: pathFor(lang, "faq"),
+      hrefContact: pathFor(lang, "contact"),
+      hrefLegal: pathFor(lang, "legal"),
       showMarquee: this.props.showMarquee !== false,
       showMockup: this.props.showMockup !== false,
       langs: CODES.map(code => ({
         code: code === "uk" ? "UA" : code.toUpperCase(),
-        pick: () => this.setState({ lang: code }),
+        pick: () => this.navigate(code, parsePath(location.pathname).section),
         style: `padding: 6px 10px; border: 0; cursor: pointer; letter-spacing: 0.08em; border-radius: 999px; background: ${code === lang ? "#0A0A0A" : "transparent"}; color: ${code === lang ? "#F2EFEA" : "rgba(10,10,10,0.6)"}; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500`
       })),
       // cards 2 (migration/domain) and 3 (speed/fixes) are text-only
