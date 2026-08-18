@@ -1,0 +1,8 @@
+{
+  // SLAPA.dc.html is dc-runtime markup: style attributes carry template
+  // interpolations like style="{{ navStyle }}", which the runtime resolves
+  // in the browser. VS Code parses those attributes as plain CSS, so every
+  // one of them reports "} expected" / "at-rule or selector expected" /
+  // "empty ruleset". The file is valid — only the linter's assumption is not.
+  "html.validate.styles": false
+}
