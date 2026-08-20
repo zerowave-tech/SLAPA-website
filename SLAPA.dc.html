@@ -37,6 +37,7 @@
   a:hover { color: #E9804A; }
   ::selection { background: #E9804A; color: #0A0A0A; }
   input, textarea, button { font-family: inherit; }
+  input::placeholder, textarea::placeholder { color: rgba(242,239,234,0.34); }
   @keyframes slapa-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* The header pill packs logo, five nav links, a language switch and a CTA
@@ -59,6 +60,12 @@
     [style*="0.85fr 1.15fr"],
     [style*="0.68fr 1.32fr"],
     [style*="1.4fr 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+
+    /* The request form keeps its three fields on one row only on desktop;
+       stacked, the card can also give back some horizontal padding.
+       Matched on the opening "minmax(" alone: browsers re-serialise the
+       inline value as minmax(0px, 1fr), so the full track never matches. */
+    [style*="repeat(3, minmax("] { grid-template-columns: 1fr !important; padding: 24px 20px 26px !important; }
   }
 </style>
 <script src="./image-slot.js"></script>
@@ -93,7 +100,9 @@
   </div>
 </header>
 
-<section id="top" style="position: relative; max-width: 1360px; margin: 0 auto; padding: clamp(56px, 10vw, 108px) 0 0; overflow: hidden">
+<!-- The hero owns the first screen: viewport minus the header pill, content
+     centred, and the marquee pushed onto the bottom edge by its auto margin. -->
+<section id="top" style="position: relative; display: flex; flex-direction: column; justify-content: center; max-width: 1360px; min-height: calc(100vh - 76px); margin: 0 auto; padding: 40px 0 18px; overflow: hidden">
   <div style="position: absolute; top: -220px; left: 50%; transform: translateX(-50%); width: 900px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.34), rgba(232,129,75,0)); pointer-events: none"></div>
   <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px">
     <span style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border: 1px solid rgba(242,239,234,0.14); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.72); white-space: nowrap">
@@ -114,7 +123,7 @@
     </div>
   </sc-if>
   <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
-    <div style="margin-top: 30px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)">
+    <div style="margin-top: auto; padding-top: 96px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)">
       <div style="display: flex; width: max-content; animation: slapa-marquee 34s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.4)">
         <span style="padding-right: 28px">{{ t.marquee }}</span>
         <span style="padding-right: 28px">{{ t.marquee }}</span>
@@ -245,6 +254,33 @@
       </div>
       <a href="{{ calLink }}" target="_blank" rel="noopener" style="align-self: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(242,239,234,0.45); text-decoration: underline; text-underline-offset: 3px" style-hover="color: #E9804A">{{ t.callFallback }} ↗</a>
     </div>
+    <form onSubmit="{{ formSubmit }}" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 30px 32px 32px; background: #121212; border: 1px solid rgba(242,239,234,0.12); border-radius: 26px">
+      <span style="grid-column: 1 / -1; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.5)">{{ t.formTitle }}</span>
+      <input type="text" name="company" tabIndex="-1" autoComplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0" />
+      <label style="{{ formField }}">
+        <span style="{{ formLabel }}">{{ t.fName }}</span>
+        <input type="text" name="name" placeholder="{{ t.fNamePh }}" style="{{ formInput }}" style-focus="border-color: #E9804A; outline: none" />
+      </label>
+      <label style="{{ formField }}">
+        <span style="{{ formLabel }}">{{ t.fSite }}</span>
+        <input type="text" name="site" placeholder="slapa.agency" style="{{ formInput }}" style-focus="border-color: #E9804A; outline: none" />
+      </label>
+      <label style="{{ formField }}">
+        <span style="{{ formLabel }}">{{ t.fContact }}</span>
+        <input type="text" name="contact" required="{{ true }}" placeholder="{{ t.fContactPh }}" style="{{ formInput }}" style-focus="border-color: #E9804A; outline: none" />
+      </label>
+      <label style="{{ formField }}; grid-column: 1 / -1">
+        <span style="{{ formLabel }}">{{ t.fTask }}</span>
+        <textarea name="task" rows="2" placeholder="{{ t.fTaskPh }}" style="{{ formArea }}" style-focus="border-color: #E9804A; outline: none"></textarea>
+      </label>
+      <div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 4px">
+        <label style="display: flex; align-items: center; gap: 11px; max-width: 46ch; font-size: 14px; line-height: 1.4; color: rgba(242,239,234,0.62); cursor: pointer">
+          <input type="checkbox" checked="{{ consentOn }}" onChange="{{ toggleConsent }}" style="flex: 0 0 auto; width: 17px; height: 17px; accent-color: #E9804A; cursor: pointer" />
+          <span>{{ t.consent }}</span>
+        </label>
+        <button type="submit" disabled="{{ formLocked }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -330,7 +366,7 @@
 </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ru&quot;,&quot;uk&quot;,&quot;hu&quot;,&quot;en&quot;],&quot;default&quot;:&quot;ru&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;calLink&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://cal.com/slapa.agency/20min&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showMockup&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;faqStartOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ru&quot;,&quot;uk&quot;,&quot;hu&quot;,&quot;en&quot;],&quot;default&quot;:&quot;ru&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;calLink&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://cal.com/slapa.agency/20min&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;formEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://utueeunwdaqjdtupzagv.supabase.co/functions/v1/contact&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showMockup&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;faqStartOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
 /* ROUTE-META-START — this block is read verbatim by scripts/build-routes.mjs.
    Keep the markers and keep the block free of browser globals. */
 const DICT = {
@@ -377,6 +413,8 @@ const DICT = {
     footNav: "Разделы", footContacts: "Связь",
     legalTitle: "Документы",
     callTitle: "Звонок", callHeading: "Выберите время для разговора", callSub: "20 минут: смотрим ваш сайт, обсуждаем задачу и сроки.", callCta: "Выбрать время", callFallback: "Открыть календарь в новой вкладке",
+    formTitle: "Или напишите нам", fName: "Имя", fNamePh: "Как к вам обращаться", fSite: "Ссылка на сайт", fContact: "Контакт", fContactPh: "email или telegram", fTask: "Задача", fTaskPh: "Что хотите изменить",
+    consent: "Соглашаюсь с обработкой персональных данных.", submit: "Отправить заявку", sent: "Заявка отправлена",
     cookieSettings: "Настройки cookie",
     legalHeading: "Документы и данные", legalSub: "Полные тексты. Договор и счёт присылаем отдельно перед началом работы.",
     cookieText: "Мы используем cookie, чтобы сайт работал корректно и мы видели статистику посещений.", cookieAccept: "Принять", cookieEssential: "Только необходимые", cookieMore: "Подробнее",
@@ -425,6 +463,8 @@ const DICT = {
     footNav: "Розділи", footContacts: "Зв'язок",
     legalTitle: "Документи",
     callTitle: "Дзвінок", callHeading: "Виберіть час для розмови", callSub: "20 хвилин: дивимось ваш сайт, обговорюємо задачу і терміни.", callCta: "Вибрати час", callFallback: "Відкрити календар у новій вкладці",
+    formTitle: "Або напишіть нам", fName: "Ім'я", fNamePh: "Як до вас звертатись", fSite: "Посилання на сайт", fContact: "Контакт", fContactPh: "email або telegram", fTask: "Задача", fTaskPh: "Що хочете змінити",
+    consent: "Погоджуюся з обробкою персональних даних.", submit: "Надіслати заявку", sent: "Заявку надіслано",
     cookieSettings: "Налаштування cookie",
     legalHeading: "Документи і дані", legalSub: "Повні тексти. Договір і рахунок надсилаємо окремо перед початком роботи.",
     cookieText: "Ми використовуємо cookie, щоб сайт працював коректно і ми бачили статистику відвідувань.", cookieAccept: "Прийняти", cookieEssential: "Лише необхідні", cookieMore: "Детальніше",
@@ -473,6 +513,8 @@ const DICT = {
     footNav: "Menü", footContacts: "Elérhetőség",
     legalTitle: "Dokumentumok",
     callTitle: "Hívás", callHeading: "Válasszon időpontot a beszélgetésre", callSub: "20 perc: megnézzük az oldalát, átbeszéljük a feladatot és a határidőket.", callCta: "Időpont választása", callFallback: "Naptár megnyitása új lapon",
+    formTitle: "Vagy írjon nekünk", fName: "Név", fNamePh: "Hogyan szólíthatjuk", fSite: "Az oldal linkje", fContact: "Elérhetőség", fContactPh: "email vagy telegram", fTask: "Feladat", fTaskPh: "Mit szeretne megváltoztatni",
+    consent: "Elfogadom a személyes adatok kezelését.", submit: "Ajánlatkérés elküldése", sent: "Elküldve",
     cookieSettings: "Cookie beállítások",
     legalHeading: "Dokumentumok és adatok", legalSub: "Teljes szövegek. A szerződést és a számlát a munka előtt külön küldjük.",
     cookieText: "Cookie-kat használunk, hogy az oldal megfelelően működjön és lássuk a látogatási statisztikát.", cookieAccept: "Elfogadom", cookieEssential: "Csak a szükségesek", cookieMore: "Részletek",
@@ -521,6 +563,8 @@ const DICT = {
     footNav: "Sections", footContacts: "Contact",
     legalTitle: "Legal",
     callTitle: "Call", callHeading: "Pick a time to talk", callSub: "20 minutes: we look at your site and go through the task and timeline.", callCta: "Pick a time", callFallback: "Open the calendar in a new tab",
+    formTitle: "Or write to us", fName: "Name", fNamePh: "What to call you", fSite: "Site link", fContact: "Contact", fContactPh: "email or telegram", fTask: "Task", fTaskPh: "What you want to change",
+    consent: "I agree to the processing of my personal data.", submit: "Send request", sent: "Request sent",
     cookieSettings: "Cookie settings",
     legalHeading: "Legal and data", legalSub: "Full texts. The contract and invoice are sent separately before work starts.",
     cookieText: "We use cookies so the site works properly and we can see visit statistics.", cookieAccept: "Accept", cookieEssential: "Only essential", cookieMore: "Details",
@@ -577,8 +621,19 @@ function META(lang, section, doc, legal) {
 }
 /* ROUTE-META-END */
 
+const MAIL = "hello@slapa.agency";
+// Our own Edge Function; see supabase/functions/contact. Blanking the
+// formEndpoint prop in the editor falls the form back to a plain mailto.
+const ENDPOINT = "https://utueeunwdaqjdtupzagv.supabase.co/functions/v1/contact";
+
+// The request form repeats one field shape four times; the strings live here
+// rather than inline so the markup stays readable.
+const FORM_FIELD = "display: flex; flex-direction: column; gap: 8px; min-width: 0";
+const FORM_LABEL = "min-width: 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.55)";
+const FORM_INPUT = "width: 100%; min-width: 0; box-sizing: border-box; padding: 15px 18px; border: 1px solid rgba(242,239,234,0.14); background: rgba(242,239,234,0.04); border-radius: 14px; font-size: 16px; line-height: 1.4; color: #F2EFEA";
+
 class Component extends DCLogic {
-  state = { lang: null, ba: 45, open: null, cookie: "pending", legal: null, doc: "privacy", menu: false, narrow: false };
+  state = { lang: null, ba: 45, open: null, cookie: "pending", legal: null, doc: "privacy", menu: false, narrow: false, consent: false, sending: false, sent: false };
 
   componentDidMount() {
     // One delegated listener beats an onClick on every nav anchor: the
@@ -786,6 +841,50 @@ class Component extends DCLogic {
     boot();
   }
 
+  // The site is static, so the request goes to whatever handler is set in
+  // the formEndpoint prop (Formspree or our own). With none configured — or
+  // when the POST fails — it falls back to a pre-filled mail to MAIL, which
+  // needs no backend at all. Either way the request reaches the same inbox.
+  submitForm(e) {
+    e.preventDefault();
+    if (this.state.sending || this.state.sent || !this.state.consent) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const val = k => String(data.get(k) || "").trim();
+    const fields = { name: val("name"), site: val("site"), contact: val("contact"), task: val("task") };
+    if (!fields.contact) {
+      const box = form.querySelector('[name="contact"]');
+      if (box) box.focus();
+      return;
+    }
+    const t = DICT[this.lang];
+    const dash = v => v || "—";
+    const body = [
+      t.fName + ": " + dash(fields.name),
+      t.fSite + ": " + dash(fields.site),
+      t.fContact + ": " + fields.contact,
+      t.fTask + ": " + dash(fields.task)
+    ].join("\n");
+    const mail = () => {
+      window.location.href = "mailto:" + MAIL
+        + "?subject=" + encodeURIComponent("SLAPA — " + (fields.name || fields.contact))
+        + "&body=" + encodeURIComponent(body);
+    };
+    const endpoint = this.props.formEndpoint === undefined ? ENDPOINT : this.props.formEndpoint;
+    if (!endpoint) { mail(); this.setState({ sent: true }); return; }
+    this.setState({ sending: true });
+    fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(Object.assign({ lang: this.lang, page: location.href, company: val("company") }, fields))
+    })
+      .then(r => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        this.setState({ sending: false, sent: true });
+      })
+      .catch(() => { mail(); this.setState({ sending: false, sent: true }); });
+  }
+
   paintBa(pct) {
     const v = Math.max(0, Math.min(100, pct));
     if (!this._clip) this._clip = document.querySelector("[data-ba-clip]");
@@ -845,7 +944,9 @@ class Component extends DCLogic {
       hrefLegal: pathFor(lang, "legal"),
       hrefCookies: pathFor(lang, "legal", "cookies"),
       showMarquee: this.props.showMarquee !== false,
-      showMockup: this.props.showMockup !== false,
+      // The hero is typographic; the framed slot stays behind the flag,
+      // which means opt-in rather than the usual opt-out default.
+      showMockup: this.props.showMockup === true,
       langs: CODES.map(code => ({
         code: code === "uk" ? "UA" : code.toUpperCase(),
         pick: () => this.navigate(code, parsePath(location.pathname).section),
@@ -890,6 +991,18 @@ class Component extends DCLogic {
       cookieAccept: () => this.setCookie("all"),
       cookieEssential: () => this.setCookie("essential"),
       cookieReset: () => this.setCookie("pending"),
+      formField: FORM_FIELD,
+      formLabel: FORM_LABEL,
+      formInput: FORM_INPUT,
+      formArea: FORM_INPUT + "; resize: vertical",
+      consentOn: this.state.consent,
+      toggleConsent: e => this.setState({ consent: e.target.checked }),
+      formSubmit: e => this.submitForm(e),
+      formLocked: !this.state.consent || this.state.sending || this.state.sent,
+      submitLabel: this.state.sent ? t.sent : t.submit,
+      submitStyle: "padding: 16px 28px; border: 0; border-radius: 999px; font-size: 15px; font-weight: 700; color: #0A0A0A; white-space: nowrap; background: "
+        + (this.state.consent ? "#E9804A" : "rgba(233,128,74,0.35)")
+        + "; cursor: " + (this.state.consent ? "pointer" : "not-allowed"),
       calLink: calLink,
       calEmbed: calLink + (calLink.includes("?") ? "&" : "?") + "embed=true&theme=dark&layout=month_view",
       legalUpdated: legalPack ? legalPack.updated : "",
