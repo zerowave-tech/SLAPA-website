@@ -1,10 +1,14 @@
 # Builder-managed (dc-runtime) local artifacts — not part of the deployed site.
-# Left in place on disk since the builder app expects these paths; just untracked here.
 uploads/
 export/
 screenshots/
 .thumbnail
-Slapag Website (standalone).html
+* Website (standalone)*.html
+
+# Local tooling (may contain project IDs / settings)
+.mcp.json
+.claude/
+skills-lock.json
 
 # OS & IDE
 .DS_Store
@@ -15,11 +19,3 @@ Thumbs.db
 
 # Node (if npm scripts added later)
 node_modules/
-.mcp.json
-.claude/
-skills-lock.json
-uploads/
-export/
-screenshots/
-.thumbnail
-Slapa Website (standalone)*.html
