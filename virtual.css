@@ -1,0 +1,823 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0A0A0A; color: #F2EFEA; font-family: Onest, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #E9804A; }
+  ::selection { background: #E9804A; color: #0A0A0A; }
+  input, textarea, button { font-family: inherit; }
+  @keyframes slapa-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+
+
+         __{max-width: 100%; overflow-x: hidden; padding: 0 20px 20px}
+
+            __{position: sticky; top: 16px; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: clamp(10px, 1.4vw, 20px); margin: 16px auto 0; max-width: 1360px; padding: 12px 14px 12px 20px; background: #E9804A; border: 1px solid rgba(10,10,10,0.12); border-radius: 999px; color: #0A0A0A}
+                               __{display: flex; align-items: center; gap: 11px; flex: 0 0 auto; color: #0A0A0A}
+                                                           __{display: block; height: 26px; width: auto}
+              __{font-size: 18px; font-weight: 800; letter-spacing: 0.16em}
+
+           __{display: flex; align-items: center; flex: 1 1 auto; min-width: 0; justify-content: center; flex-wrap: wrap; gap: 6px clamp(12px, 1.6vw, 26px); font-size: 14px; font-weight: 600}
+                                     __{color: #0A0A0A}
+                                  __{color: #0A0A0A}
+                                __{color: #0A0A0A}
+                                    __{color: #0A0A0A}
+                                  __{color: #0A0A0A}
+
+           __{display: flex; align-items: center; flex: 0 0 auto; gap: 10px}
+             __{display: flex; gap: 2px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px}
+
+                                                         __{{{ l.style }}}
+
+
+                                    __{padding: 12px 22px; background: #0A0A0A; color: #F2EFEA; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap}
+
+
+
+                      __{position: relative; max-width: 1360px; margin: 0 auto; padding: 108px 0 0; overflow: hidden}
+           __{position: absolute; top: -220px; left: 50%; transform: translateX(-50%); width: 900px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.34), rgba(232,129,75,0)); pointer-events: none}
+           __{position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 26px}
+              __{display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border: 1px solid rgba(242,239,234,0.14); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.72); white-space: nowrap}
+                __{width: 6px; height: 6px; border-radius: 999px; background: #E9804A}
+
+            __{margin: 0; max-width: 16ch; font-size: clamp(46px, 7.4vw, 116px); line-height: 1; font-weight: 900; letter-spacing: -0.04em; text-wrap: balance}
+           __{margin: 0; max-width: 58ch; font-size: 19px; line-height: 1.5; color: rgba(242,239,234,0.66); text-wrap: pretty}
+             __{display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px}
+                                      __{padding: 17px 30px; background: #E9804A; color: #0A0A0A; border-radius: 999px; font-size: 15px; font-weight: 700; white-space: nowrap}
+                                    __{padding: 17px 30px; border: 1px solid rgba(242,239,234,0.18); border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap}
+
+
+
+             __{position: relative; margin-top: 64px; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px; background: #121212; padding: 12px}
+               __{position: relative; aspect-ratio: 16 / 8; border-radius: 20px; overflow: hidden}
+
+
+
+
+
+             __{margin-top: 30px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)}
+               __{display: flex; width: max-content; animation: slapa-marquee 34s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.4)}
+                  __{padding-right: 28px}
+                  __{padding-right: 28px}
+
+
+
+
+
+                           __{max-width: 1360px; margin: 0 auto; padding: 130px 0 0}
+           __{display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px}
+              __{font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A}
+            __{margin: 0; max-width: 22ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02}
+           __{margin: 0; max-width: 52ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty}
+
+           __{display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px}
+
+               __{{{ s.cardStyle }}}
+
+                 __{position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden}
+
+
+
+                 __{display: flex; flex-direction: column; gap: 10px; padding: 0 14px}
+                   __{display: flex; align-items: baseline; gap: 12px}
+                      __{font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #E9804A}
+                    __{margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1}
+
+                 __{margin: 0; font-size: 15px; line-height: 1.55; color: rgba(242,239,234,0.62); text-wrap: pretty}
+
+
+
+
+
+
+             __{max-width: 1360px; margin: 0 auto; padding: 130px 0 0}
+           __{display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px}
+              __{font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A}
+            __{margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02}
+           __{margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(242,239,234,0.5); white-space: nowrap}
+
+           __{padding: 12px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px}
+                               __{position: relative; aspect-ratio: 16 / 8.5; border-radius: 20px; overflow: hidden; user-select: none}
+               __{position: absolute; inset: 0; background: #161616}
+
+
+                                __{position: absolute; inset: 0; clip-path: inset(0 55% 0 0); background: #1F1B18; will-change: clip-path}
+
+
+                                __{position: absolute; top: 0; bottom: 0; left: 45%; width: 2px; background: #F2EFEA; pointer-events: none; will-change: left}
+                                                               __{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54px; height: 54px; border-radius: 999px; background: #F2EFEA; color: #0A0A0A; display: grid; place-items: center; font-size: 15px; font-weight: 700; cursor: col-resize; pointer-events: auto; touch-action: none}
+
+               __{position: absolute; top: 18px; left: 18px; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #0A0A0A; background: #F2EFEA; padding: 5px 11px; border-radius: 999px}
+               __{position: absolute; top: 18px; right: 18px; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #0A0A0A; background: #F2EFEA; padding: 5px 11px; border-radius: 999px}
+
+
+
+
+                        __{max-width: 1360px; margin: 0 auto; padding: 130px 0 0}
+           __{display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 56px}
+              __{font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A}
+            __{margin: 0; max-width: 20ch; font-size: clamp(34px, 4.6vw, 66px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02}
+           __{margin: 0; max-width: 50ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty}
+
+           __{display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px}
+
+                   __{display: flex; flex-direction: column; gap: 20px; padding: 14px 14px 26px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 30px; color: inherit}
+                 __{position: relative; aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden}
+
+
+                 __{display: flex; flex-direction: column; gap: 10px; padding: 0 14px}
+                   __{display: flex; align-items: center; justify-content: space-between; gap: 16px}
+                    __{margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.03em}
+                      __{font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #E9804A}
+
+                 __{margin: 0; font-size: 15px; line-height: 1.55; color: rgba(242,239,234,0.62); text-wrap: pretty}
+                                                                    __{margin-top: 4px; align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(242,239,234,0.5)}
+
+
+
+
+
+
+                      __{max-width: 1360px; margin: 0 auto; padding: 130px 0 0}
+           __{display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 60px; align-items: start}
+             __{display: flex; flex-direction: column; gap: 18px; position: sticky; top: 110px}
+                __{font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A}
+              __{margin: 0; font-size: clamp(32px, 4.2vw, 58px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02}
+             __{margin: 0; max-width: 34ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty}
+
+             __{display: flex; flex-direction: column; gap: 12px}
+
+                 __{background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 22px; overflow: hidden}
+                                                             __{width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 24px 26px; background: none; border: 0; cursor: pointer; text-align: left; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; color: inherit}
+
+                      __{flex-shrink: 0; width: 30px; height: 30px; border-radius: 999px; background: rgba(242,239,234,0.08); display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-size: 16px}
+
+
+                   __{margin: 0; padding: 0 26px 26px; font-size: 16px; line-height: 1.6; color: rgba(242,239,234,0.62); max-width: 62ch; text-wrap: pretty}
+
+
+
+
+
+
+
+                          __{position: relative; max-width: 1360px; margin: 130px auto 0; padding: 64px 56px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 34px; overflow: hidden}
+           __{position: absolute; bottom: -260px; left: -120px; width: 700px; height: 520px; background: radial-gradient(closest-side, rgba(232,129,75,0.3), rgba(232,129,75,0)); pointer-events: none}
+           __{position: relative; display: flex; flex-direction: column; gap: 40px}
+             __{display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 32px}
+             __{display: flex; flex-direction: column; gap: 22px}
+                __{font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A}
+              __{margin: 0; max-width: 18ch; font-size: clamp(34px, 4.6vw, 62px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.02}
+             __{margin: 0; max-width: 38ch; font-size: 17px; line-height: 1.5; color: rgba(242,239,234,0.64); text-wrap: pretty}
+
+               __{display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em}
+
+
+
+
+             __{display: flex; flex-direction: column; gap: 14px}
+               __{padding: 10px; background: #121212; border: 1px solid rgba(242,239,234,0.12); border-radius: 26px}
+                                __{position: relative; min-height: 640px; border-radius: 18px; overflow: hidden; background: #0F0F0F}
+                                         __{position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 40px; text-align: center}
+                   __{margin: 0; max-width: 34ch; font-size: 15px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty}
+                                                                       __{padding: 15px 26px; background: #E9804A; color: #0A0A0A; border-radius: 999px; font-size: 15px; font-weight: 700; white-space: nowrap}
+
+
+
+                                                                 __{align-self: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(242,239,234,0.45); text-decoration: underline; text-underline-offset: 3px}
+
+
+
+
+                        __{max-width: 1360px; margin: 0 auto; padding: 130px 0 0}
+           __{display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 44px}
+              __{font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: #E9804A}
+            __{margin: 0; max-width: 20ch; font-size: clamp(30px, 3.8vw, 52px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04}
+           __{margin: 0; max-width: 52ch; font-size: 16px; line-height: 1.5; color: rgba(242,239,234,0.6); text-wrap: pretty}
+
+           __{display: grid; grid-template-columns: 0.68fr 1.32fr; gap: 40px; align-items: start}
+             __{position: sticky; top: 110px; display: flex; flex-direction: column; gap: 8px}
+
+                                                         __{{{ d.style }}}
+
+                    __{font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.55}
+
+
+             __{margin: 14px 4px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; letter-spacing: 0.06em; color: rgba(242,239,234,0.4)}
+
+                 __{padding: 42px 46px 48px; background: #121212; border: 1px solid rgba(242,239,234,0.1); border-radius: 28px}
+              __{margin: 0 0 14px; font-size: clamp(26px, 2.6vw, 36px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08}
+             __{margin: 0 0 34px; padding-bottom: 30px; border-bottom: 1px solid rgba(242,239,234,0.1); font-size: 17px; line-height: 1.55; color: rgba(242,239,234,0.66); max-width: 66ch; text-wrap: pretty}
+               __{display: flex; flex-direction: column; gap: 30px}
+
+                   __{display: grid; grid-template-columns: 26px 1fr; gap: 18px; align-items: start}
+                      __{font-family: 'JetBrains Mono', monospace; font-size: 12px; padding-top: 5px; color: #E9804A}
+                     __{display: flex; flex-direction: column; gap: 8px}
+                      __{margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.015em}
+                     __{margin: 0; font-size: 15.5px; line-height: 1.65; color: rgba(242,239,234,0.64); max-width: 74ch; text-wrap: pretty}
+
+
+
+
+
+
+
+
+            __{max-width: 1360px; margin: 0 auto; padding: 90px 0 28px}
+           __{display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 44px; border-bottom: 1px solid rgba(242,239,234,0.1)}
+             __{display: flex; flex-direction: column; gap: 14px}
+               __{display: flex; align-items: center; gap: 11px}
+                                                                __{display: block; height: 26px; width: auto}
+                  __{font-size: 18px; font-weight: 800; letter-spacing: 0.16em}
+
+             __{margin: 0; max-width: 30ch; font-size: 15px; line-height: 1.5; color: rgba(242,239,234,0.55)}
+
+             __{display: flex; flex-direction: column; gap: 12px; font-size: 15px}
+                __{font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)}
+
+
+
+
+
+
+             __{display: flex; flex-direction: column; gap: 12px; font-size: 15px}
+                __{font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)}
+
+
+
+
+             __{display: flex; flex-direction: column; gap: 12px; font-size: 15px}
+                __{font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(242,239,234,0.4)}
+
+
+
+                                                            __{align-self: flex-start; padding: 0; background: none; border: 0; color: #E9804A; font-size: 15px; font-weight: 500; cursor: pointer; text-align: left}
+
+
+           __{display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(242,239,234,0.42)}
+
+
+
+
+
+
+           __{position: fixed; left: 20px; right: 20px; bottom: 20px; z-index: 80; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; max-width: 1360px; margin: 0 auto; padding: 20px 24px; background: rgba(18,18,18,0.94); backdrop-filter: blur(14px); border: 1px solid rgba(242,239,234,0.14); border-radius: 24px}
+           __{margin: 0; max-width: 62ch; font-size: 14px; line-height: 1.5; color: rgba(242,239,234,0.72)}                                                                       __{text-decoration: underline; text-underline-offset: 3px}
+             __{display: flex; flex-wrap: wrap; gap: 10px}
+                                                                __{padding: 12px 20px; background: transparent; color: #F2EFEA; border: 1px solid rgba(242,239,234,0.2); border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap}
+                                                             __{padding: 12px 22px; background: #E9804A; color: #0A0A0A; border: 0; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
