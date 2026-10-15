@@ -93,4 +93,3 @@ Deployment
 The site is deployed on Vercel. Settings are in vercel.json: build command node scripts/build-routes.mjs, output directory dist, URLs without a trailing slash. No environment variables are needed on the site side.
 
 Connect the repository to a Vercel project and attach the domains slapa.agency and www.slapa.agency. Mail secrets are stored in Supabase, not in Vercel.<img width="411" height="242" alt="SAPA16" src="https://github.com/user-attachments/assets/bc78d994-a221-4d68-a059-d96ca74c195d" />
-<img width="411" height="242" alt="SAPA16" src="https://github.com/user-attachments/assets/90d82cac-9596-47b0-91ef-454289b507c4" />
