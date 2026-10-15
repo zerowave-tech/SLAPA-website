@@ -1,9 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node scripts/build-routes.mjs",
-  "outputDirectory": "dist",
-  "trailingSlash": false,
-  "redirects": [
-    { "source": "/SLAPA.dc.html", "destination": "/", "permanent": true }
-  ]
-}
