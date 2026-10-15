@@ -85,15 +85,15 @@
     <a href="{{ hrefLegal }}" style="color: #0A0A0A" style-hover="opacity: 0.6; color: #0A0A0A">{{ t.legalTitle }}</a>
     <div style="{{ menuLangStyle }}">
       <sc-for list="{{ langs }}" as="l" hint-placeholder-count="4">
-        <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}">{{ l.code }}</button>
+        <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}" style-hover="{{ l.hover }}">{{ l.code }}</button>
       </sc-for>
     </div>
   </nav>
   <button type="button" aria-label="Menu" onClick="{{ toggleMenu }}" style="{{ burgerStyle }}">{{ burgerIcon }}</button>
   <div style="display: flex; align-items: center; flex: 0 0 auto; gap: 10px">
-    <div style="display: flex; gap: 2px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px">
+    <div style="display: flex; align-items: center; border: 1px solid rgba(10,10,10,0.22); border-radius: 6px; overflow: hidden">
       <sc-for list="{{ langs }}" as="l" hint-placeholder-count="4">
-        <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}">{{ l.code }}</button>
+        <button type="button" onClick="{{ l.pick }}" style="{{ l.style }}" style-hover="{{ l.hover }}">{{ l.code }}</button>
       </sc-for>
     </div>
     <a href="{{ hrefContact }}" style="padding: 12px 22px; background: #0A0A0A; color: #F2EFEA; border-radius: 999px; font-size: 14px; font-weight: 700; white-space: nowrap" style-hover="background: #F2EFEA; color: #0A0A0A">{{ t.callCta }}</a>
@@ -871,7 +871,7 @@ class Component extends DCLogic {
         + "&body=" + encodeURIComponent(body);
     };
     const endpoint = this.props.formEndpoint === undefined ? ENDPOINT : this.props.formEndpoint;
-    if (!endpoint) { mail(); this.setState({ sent: true }); return; }
+    if (!endpoint) { mail(); this.setState({ sent: true }); this.finishForm(form, false); return; }
     this.setState({ sending: true });
     fetch(endpoint, {
       method: "POST",
@@ -881,8 +881,23 @@ class Component extends DCLogic {
       .then(r => {
         if (!r.ok) throw new Error("HTTP " + r.status);
         this.setState({ sending: false, sent: true });
+        this.finishForm(form, true);
       })
-      .catch(() => { mail(); this.setState({ sending: false, sent: true }); });
+      .catch(() => { mail(); this.setState({ sending: false, sent: true }); this.finishForm(form, false); });
+  }
+
+  // A sent request used to leave the card frozen: fields still full and the
+  // button stuck on "sent" until a reload. Now the confirmation holds for a
+  // beat and the form comes back empty, so a second request needs no reload.
+  // The mailto fallback keeps what was typed -- the mail client may still be
+  // waiting on it, and clearing the fields would throw the text away.
+  finishForm(form, clear) {
+    if (clear) for (const field of ["name", "site", "contact", "task", "company"]) {
+      const box = form.elements[field];
+      if (box) box.value = "";
+    }
+    clearTimeout(this._formReset);
+    this._formReset = setTimeout(() => this.setState({ sent: false, consent: false }), 4000);
   }
 
   paintBa(pct) {
@@ -903,6 +918,7 @@ class Component extends DCLogic {
     window.removeEventListener("popstate", this._onPop);
     if (this._ro) this._ro.disconnect();
     clearTimeout(this._reflow);
+    clearTimeout(this._formReset);
     this._auto = false;
     cancelAnimationFrame(this._raf);
   }
@@ -934,7 +950,7 @@ class Component extends DCLogic {
           ? "position: absolute; top: calc(100% + 10px); left: 0; right: 0; z-index: 70; display: flex; flex-direction: column; align-items: stretch; gap: 2px; padding: 12px; background: #E9804A; border: 1px solid rgba(10,10,10,0.12); border-radius: 24px; box-shadow: 0 20px 44px rgba(0,0,0,0.38); font-size: 16px; font-weight: 700"
           : "display: none",
       menuLangStyle: this.state.narrow
-        ? "display: flex; gap: 2px; margin-top: 8px; padding: 3px; background: rgba(10,10,10,0.1); border-radius: 999px; align-self: flex-start"
+        ? "display: flex; align-items: center; margin-top: 8px; border: 1px solid rgba(10,10,10,0.22); border-radius: 6px; overflow: hidden; align-self: flex-start"
         : "display: none",
       hrefHome: pathFor(lang, null),
       hrefServices: pathFor(lang, "services"),
@@ -947,10 +963,14 @@ class Component extends DCLogic {
       // The hero is typographic; the framed slot stays behind the flag,
       // which means opt-in rather than the usual opt-out default.
       showMockup: this.props.showMockup === true,
+      // One hairline box with flush segments rather than separate pills, so
+      // the four codes read as a single control and the current one is the
+      // only filled cell.
       langs: CODES.map(code => ({
         code: code === "uk" ? "UA" : code.toUpperCase(),
         pick: () => this.navigate(code, parsePath(location.pathname).section),
-        style: `padding: 6px 10px; border: 0; cursor: pointer; letter-spacing: 0.08em; border-radius: 999px; background: ${code === lang ? "#0A0A0A" : "transparent"}; color: ${code === lang ? "#F2EFEA" : "rgba(10,10,10,0.6)"}; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500`
+        style: `padding: 6px 9px; border: 0; cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; background: ${code === lang ? "#0A0A0A" : "transparent"}; color: ${code === lang ? "#F2EFEA" : "rgba(10,10,10,0.55)"}; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; transition: background 0.2s, color 0.2s`,
+        hover: code === lang ? "background: #0A0A0A; color: #F2EFEA" : "background: rgba(10,10,10,0.08); color: #0A0A0A"
       })),
       // cards 2 (migration/domain) and 3 (speed/fixes) are text-only
       services: t.services.map((s, i) => ({ num: "0" + (i + 1), title: s[0], text: s[1], slot: s[2], slotId: "slapa-service-" + i, hasImage: i < 2,
