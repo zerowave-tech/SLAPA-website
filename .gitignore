@@ -9,7 +9,11 @@ screenshots/
 .mcp.json
 .claude/
 skills-lock.json
-
+.vscode/
+.agents/
+.supabase/
+vercel.json
+.thumbnail/
 # OS & IDE
 .DS_Store
 Thumbs.db
